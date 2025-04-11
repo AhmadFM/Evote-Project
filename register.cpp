@@ -21,8 +21,6 @@ void registerUser()
     cout << "==== Register ====\n";
     cout << "Masukkan Username: ";
     cin >> newUser->username;
-    cout << "Masukkan Password: ";
-    cin >> newUser -> password;
     cout << "Pilih Peran (Panitia/Tim Sukses/Pemilih): ";
     cin >> newUser->role;
 
