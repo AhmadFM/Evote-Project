@@ -1,34 +1,77 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
 using namespace std;
 
-// int isPemilih() {}
+int jenisAdmin(string username, string password) {
+    string name, accPassword, accType, line;
+    ifstream file("akunAdmin.csv");
 
-// int isPanitia() {}
-
-// int isTimSes() {}
-
-int verifLogin(string accountName, string password) {
-    // cek panjang password untuk membedakan jenis akun
-    if (password.length() == 16) {
-        // account = pemilih
-        return 1;
-    } else if (password.length() >= 8 && password.length() <= 12) {
-        // account = panitia / tim sukses
-        return 2;
-    } else {
-        cout << "Pastikan password yang anda masukan benar." << endl;
-        return 3;
+    while(getline(file, line)) {
+        stringstream ss(line);
+        while (getline(ss, name, ',')) {
+            if (username == name) {
+                getline(ss, accPassword, ',');
+                if (accPassword != password) {
+                    return 1;
+                }
+                getline(ss, accType, ',');
+                return accType;
+            } else {
+                break;
+            }
+        }
     }
-    // apakah data akun sesuai dengan ketentan yang ada pada panitia
+    return 0;
+}
+
+int verifLogin(string accountName, string accountPassword) {
+    string allowedChar = "1234567890";
+    bool isPemilih = true;
+
+    for (int i = 0; i < accountPassword.length(); i++) {
+        size_t x = allowedChar.find(accountPassword[i]);
+        if (x == string::npos) {
+            isPemilih = false;
+            break;
+        }
+    }
+
+    string typeOfAcc = jenisAdmin(accountName, accountPassword);
+
+    cout << "typeOfAcc->" << typeOfAcc << " || ";
+
+    if (typeOfAcc == "timses"){
+        cout << "Tim Sukses";
+    } else if (typeOfAcc == "panitia") {
+        cout << "Panitia";
+    } else if (typeOfAcc == 1) {
+        cout << "Password yang anda masukan salah";
+    } else if (typeOfAcc == 0) {
+        cout << "Akun tidak ditemukan";
+    } else {
+        cout << "Pemilih";
+    }
+    return 0;
 }
 
 void verifPaslon() {
+    // timses menyalonkan kandidat
     // cek timsesnya apakah sama atau tidak -> sama = gagal
     // apakah data paslon sesuai dengan ketentuan yang ada pada panitia
 }
 
-// timses menyalonkan kandidat
-
 int main() {
+    string name, password;
+
+    cout << "Acount name: ";
+    cin >> name;
+
+    cout << "Password: ";
+    cin >> password;
+
+    cout << "Jenis akunmu: " << verifLogin(name, password) << endl;
+
     return 0;
 }
