@@ -1,15 +1,13 @@
 #include <iostream>
 #include <string>
-#include "authentication.cpp"
-#include "login.cpp"
-#include "register2.cpp"
+#include "menuUtama.hpp"
 
 using namespace std;
 
 void menuPanitia()
 {
     int pilihan;
-    int pilihan ;
+
     do
     {
         cout << "\n ======= Menu Panitia =======\n";
@@ -108,4 +106,4 @@ void menuPemilih()
 
     } while (pilihan != 0);
     
-};
+}
