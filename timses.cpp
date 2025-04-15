@@ -3,6 +3,9 @@
 #include <string>
 #include <vector>
 #include <sstream>
+
+#include "timses.hpp"
+
 using namespace std;
 
 // Struct kandidat
