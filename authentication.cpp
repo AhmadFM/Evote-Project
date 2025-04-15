@@ -40,9 +40,9 @@ string verifLogin(string accountName, string password) {
 
     string typeOfAcc = jenisAdmin(accountName, password);
 
-    if (typeOfAcc == "timses"){
+    if (typeOfAcc == "Timses"){
         return "Tim Sukses";
-    } else if (typeOfAcc == "panitia") {
+    } else if (typeOfAcc == "Panitia") {
         return "Panitia";
     } else if (typeOfAcc == "unmatched") {
         return "Password yang anda masukan salah";

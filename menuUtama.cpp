@@ -84,7 +84,7 @@ void menuPemilih()
         cout << "1. Voting\n";
         cout << "2. Cek hasil pemilu\n";
         cout << "3. Lapor kecurangan\n";
-        cout << "4. Keluar\n";
+        cout << "0. Keluar\n";
         cout << "Pilih opsi: ";
         cin >> pilihan;
 

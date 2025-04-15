@@ -12,11 +12,16 @@ void registerUser ()
     cout << "================== Register ==================\n";
     cout << "Masukkan Username: ";
     cin >> username;
-    cout << "Pilih peran (Panitia/Tim Sukses/Pemilih): ";
+    cout << "Pilih peran (Panitia/Tim Sukses/Pemilih): "; 
     cin >> role;
+
+    while (role != "Panitia" && role != "Tim Sukses" && role != "Pemilih")
+    {
+        cout << "Peran tidak valid. Silakan masukkan peran sesuai ketentuan yang ada.\n ";
+        cin >> role;
+    }
     cout << "Masukkan Password: ";
     cin >> password;
-
 
     ofstream file("akunAdmin.csv", ios::app);
     if (file.is_open())
