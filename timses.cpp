@@ -8,19 +8,14 @@
 
 using namespace std;
 
-// Struct kandidat
-struct Kandidat {
-    string namaKetua;
-    string namaWakilKetua;
-};
-
 // Menu Timses
 void tampilkanMenu() {
     cout << "=== Menu Tim Sukses ===" << endl;
     cout << "1. Daftarkan Ketua dan Wakil Ketua" << endl;
     cout << "2. Buat Visi dan Misi" << endl;
     cout << "3. Edit Informasi Kandidat" << endl;
-    cout << "4. Keluar" << endl;
+    cout << "4. Lapor Gugatan Paslon" << endl;
+    cout << "5. Keluar" << endl;
     cout << "Pilih opsi: ";
 }
 
@@ -137,6 +132,34 @@ void editInformasiKandidat(const string &namaTim, Kandidat &kandidat) {
     }
 }
 
+// Fungsi untuk melaporkan gugatan paslon
+void laporGugatanPaslon(const string &namaTim) {
+    if (namaTim.empty()) {
+        cout << "Kamu belum menambahkan Nama timsukses" << endl;
+        return; // Keluar dari fungsi jika nama tim kosong
+    }
+
+    string pasanganNomor, isiGugatan;
+    cout << "=== Form Lapor Gugatan Paslon ===" << endl;
+    cout << "Masukkan laporan gugatan untuk pasangan nomor: ";
+    getline(cin, pasanganNomor);
+    cout << "Isi Gugatan: ";
+    getline(cin, isiGugatan);
+
+    // Format nama tim sukses penggugat
+    string timPenggugat = namaTim + "_penggugat";
+    string timTergugat = pasanganNomor + "_tergugat";
+    // Simpan laporan ke file laporan_gugatan.csv
+    ofstream file("laporan_gugatan.csv", ios::app); // Membuka file dalam mode append
+    if (file.is_open()) {
+        file << timPenggugat << "," << timTergugat << "," << isiGugatan << endl;
+        file.close();
+        cout << "Laporan gugatan berhasil disimpan ke laporan_gugatan.csv!" << endl;
+    } else {
+        cout << "Gagal membuka file laporan_gugatan.csv!" << endl;
+    }
+}
+
 int main() {
     Kandidat kandidat;
     bool sudahTerdaftar = false;
@@ -171,6 +194,8 @@ int main() {
         } else if (pilihan == 3) {
             editInformasiKandidat(namaTim, kandidat);
         } else if (pilihan == 4) {
+            laporGugatanPaslon(namaTim);
+        } else if (pilihan == 5) {
             cout << "Keluar dari program." << endl;
             break;
         } else {
