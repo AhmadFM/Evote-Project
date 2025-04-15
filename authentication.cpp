@@ -60,16 +60,16 @@ void verifPaslon() {
     // apakah data paslon sesuai dengan ketentuan yang ada pada panitia
 }
 
-int main() {
-    string name, password;
+// int main() {
+//     string name, password;
 
-    cout << "Acount name: ";
-    cin >> name;
+//     cout << "Acount name: ";
+//     cin >> name;
 
-    cout << "Password: ";
-    cin >> password;
+//     cout << "Password: ";
+//     cin >> password;
 
-    cout << "Jenis akunmu: " << verifLogin(name, password) << endl;
+//     cout << "Jenis akunmu: " << verifLogin(name, password) << endl;
 
-    return 0;
-}
+//     return 0;
+// }

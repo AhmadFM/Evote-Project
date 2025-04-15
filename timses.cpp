@@ -4,7 +4,10 @@
 #include <vector>
 #include <sstream>
 
+<<<<<<< HEAD
 #include "timses.hpp"
+=======
+>>>>>>> master
 
 using namespace std;
 
