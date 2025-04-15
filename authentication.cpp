@@ -40,18 +40,16 @@ string verifLogin(string accountName, string password) {
 
     string typeOfAcc = jenisAdmin(accountName, password);
 
-    cout << "typeOfAcc->" << typeOfAcc << " || ";
-
     if (typeOfAcc == "timses"){
-        cout << "Tim Sukses";
+        return "Tim Sukses";
     } else if (typeOfAcc == "panitia") {
-        cout << "Panitia";
+        return "Panitia";
     } else if (typeOfAcc == "unmatched") {
-        cout << "Password yang anda masukan salah";
+        return "Password yang anda masukan salah";
     } else if (typeOfAcc == "notfound") {
-        cout << "Akun tidak ditemukan";
+        return "Akun tidak ditemukan";
     } else {
-        cout << "Pemilih";
+        return "Pemilih";
     }   
     return "";
 }
