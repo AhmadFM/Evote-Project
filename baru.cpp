@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "authentication.cpp"
+#include "menuUtama.cpp"
 
 
 
@@ -21,18 +22,19 @@ string login ()
 
     if (check == "panitia")
     {
-        return "Pengguna diarahkan ke menu panitia.\n";
+        menuPanitia();
     }
     else if (check == "tim sukses")
     {
-        return "Pengguna diarahkan ke menu tim sukses.\n";
+        menuTimSukses();
     }
     else if (check == "pemilih")
     {
-        return "Pengguna diarahkan ke menu pemilih.\n";
+        menuPemilih();
     }
     else
     {
         return "Login gagal. Silahkan coba kembali.\n";
     }
 }
+
