@@ -1,9 +1,7 @@
 #include <iostream>
 #include <string>
-#include "authentication.cpp"
-#include "menuUtama.cpp"
-#include "register.cpp"
-#include "login.cpp"
+#include "register.hpp"
+#include "login.hpp"
 
 using namespace std;
 
