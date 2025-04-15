@@ -1,92 +1,31 @@
 #include <iostream>
 #include <string>
+#include <fstream>
+
 using namespace std;
 
-// struct user
-struct user
+void registerUser ()
 {
-    string username;
-    string password;
-    string role;
-    user* next;
-};
+    string username, password, role;
 
-// head pointer linked list
-user* head = NULL;
-
-// Function untuk register user baru
-void registerUser()
-{
-    user* newUser = new user;
-    cout << "==== Register ====\n";
+    cout << "================== Register ==================\n";
     cout << "Masukkan Username: ";
-    cin >> newUser->username;
-    cout << "Pilih Peran (Panitia/Tim Sukses/Pemilih): ";
-    cin >> newUser->role;
+    cin >> username;
+    cout << "Pilih peran (Panitia/Tim Sukses/Pemilih): ";
+    cin >> role;
+    cout << "Masukkan Password: ";
+    cin >> password;
 
 
-    bool validPassword = false;
-    do 
+    ofstream file("akunAdmin.csv", ios::app);
+    if (file.is_open())
     {
-        cout << "Masukkan Password: ";
-        cin >> newUser -> password;
-
-        int passLength = newUser -> password.length();
-
-        if (newUser -> role == "Pemilih")
-        {
-            if (passLength == 16)
-            {
-                validPassword = true;
-            }
-            else
-            {
-                cout << "Password untuk pemilih harus 16 karakter!\n";
-            }
-        }
-        else if (newUser -> role == "Panitia" )
-        {
-            if (passLength == 12 )
-            {
-                validPassword = true;
-            }
-            else
-            {
-                cout << "Password untuk panitia harus 12 karakter!\n";
-            }
-        }
-        else if (newUser -> role == "Tim Sukses")
-        {
-            if (passLength == 12)
-            {
-                validPassword = true;
-            }
-            else
-            {
-                cout << "Password untuk tim sukses harus 12 karakter!\n";
-            }
-        }
-        else
-        {
-            cout << "Role tidak valid. Silahkan masukkan role yang benar";
-            return;
-        }
-    } while (!validPassword);
-
-    newUser -> next = NULL;
-
-    if (head == NULL)
-    {
-        head = newUser;
+        file << username << "," << password << "," << role << "\n";
+        file.close();
+        cout << "Register berhasil.\n";
     }
     else
     {
-        user* temp = head;
-        while (temp -> next != NULL)
-        {
-            temp = temp -> next;
-        }
-        temp -> next = newUser;
+        cout << "Gagal membuka file untuk menyimpan data.\n";
     }
-    cout << "Register berhasil.\n";
 }

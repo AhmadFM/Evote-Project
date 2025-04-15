@@ -1,22 +1,14 @@
 #include <iostream>
 #include <string>
+#include "authentication.cpp"
+#include "login.cpp"
+#include "register2.cpp"
 
 using namespace std;
 
-// struct user
-struct user
-{
-    string username;
-    string password;
-    string role;
-    user* next;
-};
-
-// head pointer linked list
-user* head = NULL;
-
 void menuPanitia()
 {
+    int pilihan;
     int pilihan ;
     do
     {
@@ -116,29 +108,4 @@ void menuPemilih()
 
     } while (pilihan != 0);
     
-}
-
-void menuUtama(user* user)
-{
-    cout << "\n ======= Menu Utama =======\n";
-    cout << "Selamat datang, " << user -> username << user -> role;
-    
-    if (user -> role == "Tim Sukses")
-    {
-        menuTimSukses();
-    }
-    else if (user -> role == "Pemilih")
-    {
-        menuPemilih();
-    }
-    else if (user -> role == "Panitia")
-    {
-        menuPanitia();
-    }
-    else 
-    {
-        cout << "role tidak ditemukan.";
-    };
-}
-
-
+};
