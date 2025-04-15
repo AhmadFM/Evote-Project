@@ -1,13 +1,12 @@
 #include <iostream>
 #include <string>
-#include "authentication.cpp"
-#include "menuUtama.cpp"
-
+#include "authentication.hpp"
+#include "menuUtama.hpp"
+#include "login.hpp"
 
 
 using namespace std;
-
-string login ()
+void login()
 {
     string username, password;
 
@@ -20,21 +19,22 @@ string login ()
    string check = verifLogin(username, password);
 
 
-    if (check == "panitia")
+    if (check == "Panitia")
     {
         menuPanitia();
     }
-    else if (check == "tim sukses")
+    else if (check == "Tim Sukses")
     {
         menuTimSukses();
     }
-    else if (check == "pemilih")
+    else if (check == "Pemilih")
     {
         menuPemilih();
     }
     else
     {
-        return "Login gagal. Silahkan coba kembali.\n";
+        return ;
     }
 }
+
 
