@@ -18,5 +18,6 @@ void buatVisiMisi(const string &namaTim, const Kandidat &kandidat);
 void editInformasiKandidat(const string &namaTim, Kandidat &kandidat);
 void perbaruiCSV(const string &namaTim, const Kandidat &kandidat);
 void tampilkanDataKandidat();
+void laporGugatanPaslon(const string &namaTim);
 
 #endif
