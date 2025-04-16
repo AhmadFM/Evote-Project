@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <cctype>
+#include "authentication.hpp"
 using namespace std;
 
 struct node {
@@ -42,20 +43,33 @@ void getAccData(string fileName) {
 }
 
 void saveNewAcc(string filename, string nama, string pass, string jenis) {
+    string lastLine;
+    ifstream checkFile(filename);
+    if (checkFile.is_open()) {
+        string line;
+        while (getline(checkFile, line)) {
+            lastLine = line;
+        }
+        checkFile.close();
+    }
+    
     ofstream file(filename, ios::app);
     if (file.is_open()) {
-        file << nama << "," << pass << "," << jenis << "\n";
+        if (!lastLine.empty() && lastLine.back() != '\n') {
+            file << "\n";
+        }
+        file << nama << "," << pass << "," << jenis;
         file.close();
     } else {
         cout << "Gagal membuka file.\n";
     }
 }
 
-bool nameInData(string name) {
+bool nameInData(string Name) {
     node *head = NULL;
     node *temp = head;
     while (temp) {
-        if (temp->name == name) {
+        if (temp->name == Name) {
             return true;
             temp = temp->next;
         }
@@ -104,29 +118,29 @@ bool validPassword(string type, string password) {
     return false;
 }
 
-void verifRegister(string nama, string password, string jenis) {
+bool verifRegister(string nama, string password, string jenis) {
     // mengecek apakah username sudah digunakan di akun lain
     // mengecek apakah pilihan user sesuai dengan kriteria aun yang ada
     // mengecek apakah password valid sesuai jenis akun yang dipilih sebelumnya
     if (nameInData(nama)) {
         cout << "Nama sudah digunakan, coba nama lain." << endl;
-        return;
+        return false;
     }
 
     if (!isInType(jenis)) {
         cout << "Pilih jenis akun yang sesuai." << endl;;
-        return;
+        return false;
     }
 
     if (!validPassword(jenis, password)) {
         cout << "Password tidak sesuai" << endl;
-        return;
+        return false;
     }
 
     addUser(nama, password, jenis);
-    saveNewAcc("akun.csv", nama, password, jenis);
-    cout << "Registrasi berhasil.";
-    return;
+    saveNewAcc("akunAdmin.csv", nama, password, jenis);
+    cout << "Registrasi berhasil." << endl;
+    return true;
 }
 
 
@@ -157,17 +171,17 @@ string verifLogin(string accountName, string password) {
     string typeOfAcc = jenisAdmin(accountName, password);
 
     if (typeOfAcc == "Timses"){
-        return "Tim Sukses";
+        cout << "Login berhasil" << endl;
     } else if (typeOfAcc == "Panitia") {
-        return "Panitia";
+        cout << "Login berhasil" << endl;
     } else if (typeOfAcc == "unmatched") {
-        return "Password yang anda masukan salah";
+        cout << "Password yang anda masukan salah" << endl;
     } else if (typeOfAcc == "notfound") {
-        return "Akun tidak ditemukan";
+        cout << "Akun tidak ditemukan" << endl;
     } else {
-        return "Pemilih";
+        cout << "Login berhasil" << endl;
     }   
-    return "";
+    return typeOfAcc;
 }
 
 void verifPaslon() {
@@ -177,19 +191,39 @@ void verifPaslon() {
 }
 
 // int main() {
-//     string name, password;
+//     string name, password, type;
 
-//     cout << "Acount name: ";
-//     cin >> name;
+//     //register
+//     bool verificated = false;
+    
+//     while (!verificated) {
+//         cout << "Nama akun baru: ";
+//         cin >> name;
 
-//     cout << "Password: ";
-//     cin >> password;
+//         cout << "Jenis akun baru (panitia/timses/pemilih): ";
+//         cin >> type;
 
-//     cout << "Jenis akunmu: " << verifLogin(name, password) << endl;
+//         cout << "Password akun baru: ";
+//         cin >> password;
+
+//         verificated = verifRegister(name, password, type);
+//     }
+
+//     string inData = "unmatched";
+
+//     while (inData == "unmatched" || inData == "notfound") {
+//         cout << "Nama akun: ";
+//         cin >> name;
+
+//         cout << "Password akun: ";
+//         cin >> password;
+
+//         inData = verifLogin(name, password);
+//     }
 
 //     return 0;
 // }
 
-// int main() {
-//     cout << validPassword("pemilih", "1263284384697732");
-// }
+// // int main() {
+// //     cout << validPassword("pemilih", "1263284384697732");
+// // }
