@@ -156,9 +156,9 @@ string jenisAdmin(string username, string password) {
 string verifLogin(string accountName, string password) {
     string typeOfAcc = jenisAdmin(accountName, password);
 
-    if (typeOfAcc == "Timses"){
+    if (typeOfAcc == "timses"){
         return "Tim Sukses";
-    } else if (typeOfAcc == "Panitia") {
+    } else if (typeOfAcc == "panitia") {
         return "Panitia";
     } else if (typeOfAcc == "unmatched") {
         return "Password yang anda masukan salah";

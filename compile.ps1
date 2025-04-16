@@ -1,0 +1,1 @@
+g++ .\main.cpp .\authentication.cpp .\authentication.hpp .\login.cpp .\login.hpp .\menuUtama.cpp .\menuUtama.hpp .\panitia.cpp .\panitia.hpp .\pemilih.cpp .\pemilih.hpp .\register.cpp .\register.hpp .\timses.cpp .\timses.hpp -o evote.exe

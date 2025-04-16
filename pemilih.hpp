@@ -1,6 +1,9 @@
 #ifndef PEMILIH_HPP
 #define PEMILIH_HPP
 
+#include <iostream>
+#include <ctime>
+
 void insertCalon(int no, std::string Ketua, std::string Wakil);
 bool confirm();
 void suratSuara();

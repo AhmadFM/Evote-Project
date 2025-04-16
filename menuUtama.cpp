@@ -3,6 +3,7 @@
 #include<ctime>
 #include "menuUtama.hpp"
 #include "pemilih.hpp"
+#include "panitia.hpp"
 
 using namespace std;
 
@@ -13,10 +14,9 @@ void menuPanitia()
     do
     {
         cout << "\n ======= Menu Panitia =======\n";
-        cout << "1. Atur ketentuan pemilu\n";
-        cout << "2. Verifikasi pasangan calon\n";
-        cout << "3. Edit data pemilih\n";
-        cout << "4. Verifikasi gugatan/laporan\n";
+        cout << "1. Verifikasi pasangan calon\n";
+        cout << "2. Edit data pemilih\n";
+        cout << "3. Verifikasi gugatan/laporan\n";
         cout << "0. Kembali\n";
         cout << "Pilih opsi: ";
         cin >> pilihan;
@@ -24,15 +24,13 @@ void menuPanitia()
         switch (pilihan)
         {
             case 1:
-                cout << "Atur ketentuan pemilu\n";
-                break;
-            case 2:
                 cout << "Verifikasi pasangan calon\n";
+                verifikasiKandidat();
                 break;
-            case 3: 
+            case 2: 
                 cout << "Edit data pemilih\n";
                 break;
-            case 4:
+            case 3:
                 cout << "Verifikasi gugatan/laporan";
                 break;
             case 0:
