@@ -132,6 +132,7 @@ void editInformasiKandidat(const string &namaTim, Kandidat &kandidat) {
     }
 }
 
+
 // Fungsi untuk melaporkan gugatan paslon
 void laporGugatanPaslon(const string &namaTim) {
     if (namaTim.empty()) {
