@@ -106,7 +106,7 @@ void cetakHasilHitungSuara(){
 }
 
 // Voting
-void voting(time_t start = time(0); time_t end = time(0); time_t now = time(0)){
+void voting(time_t start = time(0), time_t end = time(0), time_t now = time(0)){
     if (waktuVoting(start, end, now)){
         bool cek = false;
         do {
@@ -193,6 +193,7 @@ void laporKecurangan (){
 
 // int main(){
 //     do {
+//         voting();
 //         laporKecurangan();
 //         return 0;
 //     } while (true);
