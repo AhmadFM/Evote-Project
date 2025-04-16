@@ -19,15 +19,15 @@ void login()
    string check = verifLogin(username, password);
 
 
-    if (check == "Panitia")
+    if (check == "panitia")
     {
         menuPanitia();
     }
-    else if (check == "Timses")
+    else if (check == "timses")
     {
         menuTimSukses();
     }
-    else if (check == "Pemilih")
+    else if (check == "pemilih")
     {
         menuPemilih();
     }
