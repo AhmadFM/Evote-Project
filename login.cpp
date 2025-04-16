@@ -23,7 +23,7 @@ void login()
     {
         menuPanitia();
     }
-    else if (check == "Tim Sukses")
+    else if (check == "Timses")
     {
         menuTimSukses();
     }

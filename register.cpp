@@ -13,7 +13,7 @@ void registerUser ()
     cout << "================== Register ==================\n";
     cout << "Masukkan Username: ";
     cin >> username;
-    cout << "Pilih peran (panitia/timses/pemilih): "; 
+    cout << "Pilih peran (Panitia/Timses): "; 
     cin >> role;
     cout << "Masukkan Password: ";
     cin >> password;

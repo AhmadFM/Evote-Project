@@ -160,7 +160,7 @@ void laporGugatanPaslon(const string &namaTim) {
     }
 }
 
-int main() {
+void main_timses() {
     Kandidat kandidat;
     bool sudahTerdaftar = false;
     string namaTim;
@@ -205,5 +205,4 @@ int main() {
         cout << endl;
     }
 
-    return 0;
 }
