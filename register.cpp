@@ -26,6 +26,6 @@ void registerUser ()
     
 }
 
-int main() {
-    registerUser();
-}
+// int main() {
+//     registerUser();
+// }
