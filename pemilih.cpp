@@ -106,8 +106,7 @@ void cetakHasilHitungSuara(){
 }
 
 // Voting
-void voting(){
-    time_t start = time(0), time_t end = time(0), time_t now = time(0);
+void voting(time_t start = time(0); time_t end = time(0); time_t now = time(0)){
     if (waktuVoting(start, end, now)){
         bool cek = false;
         do {
@@ -160,8 +159,7 @@ void hitungSuara(){
 } 
 
 // Lihat Jumlah Suara
-void lihatJumlahSuara(){
-    time_t end = time(0)
+void lihatJumlahSuara(time_t end = time(0)){
     if (waktuHasil(end)){
         ifstream file("kandidat.csv");
         string line, no, Ketua, Wakil;
@@ -182,7 +180,7 @@ void lihatJumlahSuara(){
         cout << "==== Hasil Akumulasi Voting ====" << endl;
         cetakHasilHitungSuara();
         return;
-    }else{
+    } else{
         cout << "Maaf, masa pemilihan masih berjalan!\n";
         return;
     }

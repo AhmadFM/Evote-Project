@@ -1,6 +1,6 @@
-#ifndef MENUUTAMA_HPP
-#define MENUUTAMA_HPP
-
+#ifndef PEMILIH_HPP
+#define PEMILIH_HPP
+#include 
 void insertCalon(int no, string Ketua, string Wakil);
 bool confirm();
 void suratSuara();
@@ -9,7 +9,7 @@ bool waktuHasil(time_t waktuAkhir, time_t sekarang);
 void voting(time_t start, time_t end, time_t now);
 void cetakHasilHitungSuara();
 void hitungSuara();
-void lihatJumlahSuara(time_t end);
+void lihatJumlahSuara(time_t end));
 void laporKecurangan ();
 
 #endif
