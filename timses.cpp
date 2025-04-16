@@ -89,8 +89,8 @@ void perbaruiCSV(const string &namaTim, const Kandidat &kandidat) {
         fileOutput.close();
 
         // Ganti file lama dengan file baru
-        remove("kandidat.csv");
-        rename("kandidat_temp.csv", "kandidat.csv");
+        remove("calon_kandidat.csv");
+        rename("calon_kandidat_temp.csv", "calon_kandidat.csv");
 
         if (ditemukan) {
             cout << "Data kandidat berhasil diperbarui di file kandidat.csv!" << endl;
