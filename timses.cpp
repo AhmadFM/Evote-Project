@@ -21,7 +21,7 @@ void tampilkanMenu() {
 
 // simpan data kandidat kedalam file kandidat.csv
 void simpanKeCSV(const string &namaTim, const Kandidat &kandidat, const string &visi, const string &misi) {
-    ofstream file("kandidat.csv", ios::app); // Membuka file dalam mode append
+    ofstream file("calon_kandidat.csv", ios::app); // Membuka file dalam mode append
     if (file.is_open()) {
         file << namaTim << "," << kandidat.namaKetua << "," << kandidat.namaWakilKetua << "," << visi << "," << misi << endl;
         file.close();
@@ -58,8 +58,8 @@ void buatVisiMisi(const string &namaTim, const Kandidat &kandidat) {
 
 // update csv (rewrite)
 void perbaruiCSV(const string &namaTim, const Kandidat &kandidat) {
-    ifstream fileInput("kandidat.csv");
-    ofstream fileOutput("kandidat_temp.csv");
+    ifstream fileInput("calon_kandidat.csv");
+    ofstream fileOutput("calon_kandidat_temp.csv");
     bool ditemukan = false;
 
     if (fileInput.is_open() && fileOutput.is_open()) {
