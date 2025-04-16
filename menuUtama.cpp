@@ -1,8 +1,11 @@
 #include <iostream>
 #include <string>
 #include <ctime>
+#include <fstream>
+#include <ctime>
 #include "menuUtama.hpp"
 #include "pemilih.hpp"
+#include "panitia.hpp"
 #include "timses.hpp"
 
 using namespace std;
@@ -14,10 +17,9 @@ void menuPanitia()
     do
     {
         cout << "\n ======= Menu Panitia =======\n";
-        cout << "1. Atur ketentuan pemilu\n";
+        cout << "1. Ubah ketentuan voting\n";
         cout << "2. Verifikasi pasangan calon\n";
-        cout << "3. Edit data pemilih\n";
-        cout << "4. Verifikasi gugatan/laporan\n";
+        cout << "3. Lihat gugatan/laporan\n";
         cout << "0. Kembali\n";
         cout << "Pilih opsi: ";
         cin >> pilihan;
@@ -25,16 +27,16 @@ void menuPanitia()
         switch (pilihan)
         {
             case 1:
-                cout << "Atur ketentuan pemilu\n";
+                cout << "Ubah ketentuan voting\n";
+                ubahKetentuan();
                 break;
             case 2:
                 cout << "Verifikasi pasangan calon\n";
+                verifikasiKandidat();
                 break;
-            case 3: 
-                cout << "Edit data pemilih\n";
-                break;
-            case 4:
-                cout << "Verifikasi gugatan/laporan";
+            case 3:
+                cout << "Lihat gugatan/laporan";
+                lihatLaporanGugatan();
                 break;
             case 0:
                 cout << "Kembali ke menu utama\n";
@@ -53,7 +55,7 @@ void menuTimSukses()
     
 }
 
-void menuPemilih()
+void menuPemilih(string username)
 {
     int pilihan;
 
@@ -62,25 +64,44 @@ void menuPemilih()
         cout << "\n ======= Menu Pemilih =======\n";
         cout << "1. Voting\n";
         cout << "2. Cek hasil pemilu\n";
-        cout << "3. Lapor kecurangan\n";
         cout << "0. Keluar\n";
         cout << "Pilih opsi: ";
         cin >> pilihan;
-        time_t waktu = time(0);
+
+        time_t start_date;
+        time_t end_date;
+        time_t now_date = time(0);
+
+        ifstream file("./ketentuan.txt");
+        string textRead;
+        int fileRow = 0;
+        while (getline(file, textRead)) {
+            if (fileRow == 0)
+            {
+                time_t convertedDate = (time_t)stoi(textRead);
+                start_date = convertedDate;
+            }
+            else if (fileRow == 1)
+            {
+                time_t convertedDate = (time_t)stoi(textRead);
+                end_date = convertedDate;
+            }
+            fileRow++;
+        }
+
+        cout << "Start: " << start_date << "\n";
+        cout << "End: " << end_date << "\n";
+        cout << "Now: " << now_date << "\n";
 
         switch (pilihan)
         {
             case 1:
                 cout << "Voting\n";
-                voting(waktu,waktu,waktu); //isi perameter waktu yang sesuai
+                voting(start_date,end_date,now_date,username); //isi perameter waktu yang sesuai
                 break;
-                case 2:
+            case 2:
                 cout << "Cek hasil pemilu\n";
-                lihatJumlahSuara(waktu);
-                break;
-            case 3:
-                cout << "Lapor kecurangan\n";
-                laporKecurangan();
+                lihatJumlahSuara(now_date);
                 break;
             case 0:
                 cout << "Kembali ke menu utama\n";

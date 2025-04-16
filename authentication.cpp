@@ -139,7 +139,7 @@ bool verifRegister(string nama, string password, string jenis) {
     }
 
     addUser(nama, password, jenis);
-    saveNewAcc("akunAdmin.csv", nama, password, jenis);
+    saveNewAcc("akun.csv", nama, password, jenis);
     cout << "Registrasi berhasil.";
     return true;
 }
@@ -148,7 +148,7 @@ bool verifRegister(string nama, string password, string jenis) {
 
 string jenisAdmin(string username, string password) {
     string name, accPassword, accType, line;
-    ifstream file("akunAdmin.csv");
+    ifstream file("akun.csv");
 
     while(getline(file, line)) {
         stringstream ss(line);

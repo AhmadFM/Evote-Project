@@ -29,7 +29,7 @@ void login()
     }
     else if (check == "pemilih")
     {
-        menuPemilih();
+        menuPemilih(username);
     }
     else
     {

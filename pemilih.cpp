@@ -1,16 +1,16 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <string>
 #include <ctime>
+#include <string>
 #include "pemilih.hpp"
 using namespace std;
 
 struct calon{
-    int noUrut;
+    string timSukses;
     string ketua;
     string wakil;
-    int count;
+    int count = 0;
     calon *next;
 };
 
@@ -24,10 +24,10 @@ bool isEmpty(){
 }
 
 //masukan calon ke list
-void insertCalon(int no, string Ketua, string Wakil){
+void insertCalon(string timSukses, string Ketua, string Wakil){
     calon *new_calon;
     new_calon = new calon;
-    new_calon -> noUrut = no;
+    new_calon -> timSukses = timSukses;
     new_calon -> ketua = Ketua;
     new_calon -> wakil = Wakil;
     new_calon -> count = 0;
@@ -60,25 +60,31 @@ bool confirm(){
     return 0;
 }
 
-void suratSuara(){
-    ifstream file("kandidat.csv");
-    string line, ketua, wakil, visi, misi, noUrut;
+int suratSuara(){
+    ifstream file("confirmedKandidat.csv");
+    string line, ketua, wakil, visi, misi, timSukses;
+
+    int noUrut = 1;
     
     cout << "===== Surat Suara =====\n";
     while(getline(file, line)) {
         stringstream ss(line);
-        while (getline(ss, noUrut, ',')) {
+        while (getline(ss, timSukses, ',')) {
             getline(ss, ketua, ',');
             getline(ss, wakil, ',');
             getline(ss, visi, ',');
             getline(ss, misi, ',');
             cout << noUrut << endl;
+            cout << timSukses << endl;
             cout << ketua << " & " << wakil << endl;
             cout << "visi : " << visi << endl; 
             cout << "misi : " << misi << endl;
             cout << "-----------------------\n";
         }
+        noUrut++;
     }
+
+    return noUrut;
 }
 
 bool waktuVoting(time_t waktuMulai, time_t waktuAkhir, time_t sekarang) {
@@ -93,30 +99,55 @@ bool waktuHasil(time_t waktuAkhir, time_t sekarang = time(0)){
 void cetakHasilHitungSuara(){
     if (!isEmpty())
     {
-        current = head;
-        while (current!=NULL)
+        calon* cr = head;
+        while (cr!=NULL)
         {
-            cout << current->noUrut << ".|";
-            cout << current->ketua << "\t&\t";
-            cout << current->wakil << "\t| ";
-            cout << current->count << " Suara" << endl;
-            current = current -> next;
+            cout << cr->timSukses << ".|";
+            cout << cr->ketua << "\t&\t";
+            cout << cr->wakil << "\t| ";
+            cout << cr->count << " Suara" << endl;
+            cr = cr -> next;
         }
     }
 }
 
+void kirimSuara(int no_urut, string username, time_t date)
+{
+    string lastLine;
+    ifstream checkFile("./suara.csv");
+    if (checkFile.is_open()) {
+        string line;
+        while (getline(checkFile, line)) {
+            lastLine = line;
+        }
+        checkFile.close();
+    }
+    
+    ofstream file("./suara.csv", ios::app);
+    if (file.is_open()) {
+        if (!lastLine.empty() && lastLine.back() != '\n') {
+            file << "\n";
+        }
+        file << no_urut << "," << username << "," << date;
+
+        file.close();
+    } else {
+        cout << "Gagal membuka file.\n";
+    }
+}
+
 // Voting
-void voting(time_t start = time(0), time_t end = time(0), time_t now = time(0)){
+void voting(time_t start, time_t end, time_t now, string username){
     if (waktuVoting(start, end, now)){
         bool cek = false;
         do {
             cout << "\n===== Selamat Memilih =====\n";
-            suratSuara();
-            string pilih; 
+            int jumlahPaslon = suratSuara();
+            int pilih; 
             while (true){
                 cout << "Pilih nomor urut kandidat pilihan Anda: "; 
                 cin >> pilih;
-                if (pilih == "1" or pilih == "2" or pilih == "3"){
+                if (pilih > 0 && pilih < jumlahPaslon){
                     break;
                 } else{
                     cout << "Maaf, input tidak sesuai" << endl;
@@ -126,7 +157,7 @@ void voting(time_t start = time(0), time_t end = time(0), time_t now = time(0)){
             
             if(confirm()){
                 cek = true;
-                //Kirim hasil voting
+                kirimSuara(pilih, username, now);
             }else {
                 cek = false;
             }
@@ -138,22 +169,31 @@ void voting(time_t start = time(0), time_t end = time(0), time_t now = time(0)){
     }
 }
 void hitungSuara(){
+    calon* cr = head;
+    while (cr != NULL)
+    {
+        cr->count = 0;
+        cr = cr->next;
+    }
+
     ifstream file("suara.csv");
     string line;
     while (getline(file, line)){
         stringstream ss(line);
         string no;
         getline(ss, no, ',');
+        int noUrutPilihan = stoi(no);
         
-        int urut = stoi(no);
+        int noUrut = 1;
         current = head;
         while (current != NULL){
-            if (current-> noUrut != urut){
+            if (noUrut != noUrutPilihan){
                 current = current -> next;
             } else{
                 current -> count = current -> count + 1;
                 break;
             }
+            noUrut++;
         }
     }
 } 
@@ -161,7 +201,9 @@ void hitungSuara(){
 // Lihat Jumlah Suara
 void lihatJumlahSuara(time_t end = time(0)){
     if (waktuHasil(end)){
-        ifstream file("kandidat.csv");
+        head = NULL;
+        
+        ifstream file("confirmedKandidat.csv");
         string line, no, Ketua, Wakil;
         while(getline(file, line)) {
             stringstream ss(line);
@@ -169,9 +211,9 @@ void lihatJumlahSuara(time_t end = time(0)){
                 getline(ss, Ketua, ',');
                 getline(ss, Wakil, ',');
 
-                int urut = stoi(no);
-                cout << urut << " " << Ketua << " " << Wakil << endl;
-                insertCalon(urut, Ketua, Wakil);
+                string timSukses = no;
+                // cout << timSukses << " " << Ketua << " " << Wakil << endl;
+                insertCalon(timSukses, Ketua, Wakil);
                 break;
             }
         }
@@ -184,11 +226,6 @@ void lihatJumlahSuara(time_t end = time(0)){
         cout << "Maaf, masa pemilihan masih berjalan!\n";
         return;
     }
-}
-
-// MAIN Lapor Kecurangan
-void laporKecurangan (){
-    // proc
 }
 
 // int main(){
