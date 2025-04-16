@@ -2,6 +2,8 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <ctime>
+#include "pemilih.hpp"
 using namespace std;
 
 struct calon{
@@ -87,10 +89,25 @@ bool waktuHasil(time_t waktuAkhir, time_t sekarang = time(0)){
     return (waktuAkhir == sekarang);
 }
 
+
+void cetakHasilHitungSuara(){
+    if (!isEmpty())
+    {
+        current = head;
+        while (current!=NULL)
+        {
+            cout << current->noUrut << ".|";
+            cout << current->ketua << "\t&\t";
+            cout << current->wakil << "\t| ";
+            cout << current->count << " Suara" << endl;
+            current = current -> next;
+        }
+    }
+}
+
 // Voting
-void voting(time_t start = time(0), time_t end = time(0), time_t now = time(0)){
-    cout << start << endl << end << endl // ganti sama waktu dari panitia
-         << now << endl; 
+void voting(){
+    time_t start = time(0), time_t end = time(0), time_t now = time(0);
     if (waktuVoting(start, end, now)){
         bool cek = false;
         do {
@@ -121,22 +138,6 @@ void voting(time_t start = time(0), time_t end = time(0), time_t now = time(0)){
         return;
     }
 }
-
-void cetakList(){
-    if (!isEmpty())
-    {
-        current = head;
-        while (current!=NULL)
-        {
-            cout << current->noUrut << ".|";
-            cout << current->ketua << "\t&\t";
-            cout << current->wakil << "\t| ";
-            cout << current->count << " Suara" << endl;
-            current = current -> next;
-        }
-    }
-}
-
 void hitungSuara(){
     ifstream file("suara.csv");
     string line;
@@ -159,7 +160,8 @@ void hitungSuara(){
 } 
 
 // Lihat Jumlah Suara
-void lihatJumlahSuara(time_t end = time(0)){
+void lihatJumlahSuara(){
+    time_t end = time(0)
     if (waktuHasil(end)){
         ifstream file("kandidat.csv");
         string line, no, Ketua, Wakil;
@@ -178,22 +180,22 @@ void lihatJumlahSuara(time_t end = time(0)){
         
         hitungSuara();
         cout << "==== Hasil Akumulasi Voting ====" << endl;
-        cetakList();
+        cetakHasilHitungSuara();
+        return;
     }else{
         cout << "Maaf, masa pemilihan masih berjalan!\n";
         return;
     }
 }
 
-// Lapor Kecurangan
+// MAIN Lapor Kecurangan
 void laporKecurangan (){
     // proc
 }
 
-int main(){
-    do {
-        lihatJumlahSuara();
-        laporKecurangan();
-        return 0;
-    } while (true);
-}
+// int main(){
+//     do {
+//         laporKecurangan();
+//         return 0;
+//     } while (true);
+// }
