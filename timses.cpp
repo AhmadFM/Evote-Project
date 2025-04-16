@@ -4,14 +4,9 @@
 #include <vector>
 #include <sstream>
 
+#include "timses.hpp"
 
 using namespace std;
-
-// Struct kandidat
-struct Kandidat {
-    string namaKetua;
-    string namaWakilKetua;
-};
 
 // Menu Timses
 void tampilkanMenu() {
@@ -19,19 +14,20 @@ void tampilkanMenu() {
     cout << "1. Daftarkan Ketua dan Wakil Ketua" << endl;
     cout << "2. Buat Visi dan Misi" << endl;
     cout << "3. Edit Informasi Kandidat" << endl;
-    cout << "4. Keluar" << endl;
+    cout << "4. Lapor Gugatan Paslon" << endl;
+    cout << "5. Keluar" << endl;
     cout << "Pilih opsi: ";
 }
 
-// simpan data kandidat kedalam file calon_kandidat.csv
+// simpan data kandidat kedalam file kandidat.csv
 void simpanKeCSV(const string &namaTim, const Kandidat &kandidat, const string &visi, const string &misi) {
-    ofstream file("calon_kandidat.csv", ios::app); // Membuka file dalam mode append
+    ofstream file("kandidat.csv", ios::app); // Membuka file dalam mode append
     if (file.is_open()) {
         file << namaTim << "," << kandidat.namaKetua << "," << kandidat.namaWakilKetua << "," << visi << "," << misi << endl;
         file.close();
-        cout << "Data tim sukses, kandidat, visi, dan misi berhasil disimpan ke calon_kandidat.csv!" << endl;
+        cout << "Data tim sukses, kandidat, visi, dan misi berhasil disimpan ke kandidat.csv!" << endl;
     } else {
-        cout << "Gagal membuka file calon_kandidat.csv!" << endl;
+        cout << "Gagal membuka file kandidat.csv!" << endl;
     }
 }
 
@@ -55,15 +51,15 @@ void buatVisiMisi(const string &namaTim, const Kandidat &kandidat) {
         cout << "Masukkan Misi: ";
         getline(cin, misi);
 
-        // Simpan nama tim, ketua, wakil, visi, dan misi ke file calon_kandidat.csv
+        // Simpan nama tim, ketua, wakil, visi, dan misi ke file kandidat.csv
         simpanKeCSV(namaTim, kandidat, visi, misi);
     }
 }
 
 // update csv (rewrite)
 void perbaruiCSV(const string &namaTim, const Kandidat &kandidat) {
-    ifstream fileInput("calon_kandidat.csv");
-    ofstream fileOutput("calon_kandidat_temp.csv");
+    ifstream fileInput("kandidat.csv");
+    ofstream fileOutput("kandidat_temp.csv");
     bool ditemukan = false;
 
     if (fileInput.is_open() && fileOutput.is_open()) {
@@ -93,47 +89,16 @@ void perbaruiCSV(const string &namaTim, const Kandidat &kandidat) {
         fileOutput.close();
 
         // Ganti file lama dengan file baru
-        remove("calon_kandidat.csv");
-        rename("calon_kandidat_temp.csv", "calon_kandidat.csv");
+        remove("kandidat.csv");
+        rename("kandidat_temp.csv", "kandidat.csv");
 
         if (ditemukan) {
-            cout << "Data kandidat berhasil diperbarui di file calon_kandidat.csv!" << endl;
+            cout << "Data kandidat berhasil diperbarui di file kandidat.csv!" << endl;
         } else {
-            cout << "Nama tim tidak ditemukan di file calon_kandidat.csv. Tidak ada perubahan yang dilakukan." << endl;
+            cout << "Nama tim tidak ditemukan di file kandidat.csv. Tidak ada perubahan yang dilakukan." << endl;
         }
     } else {
-        cout << "Gagal membuka file calon_kandidat.csv!" << endl;
-    }
-}
-
-// Fungsi untuk membaca dan menampilkan isi file calon_kandidat.csv
-void tampilkanDataKandidat() {
-    ifstream file("calon_kandidat.csv");
-    if (file.is_open()) {
-        string line;
-        cout << "=== Data Kandidat ===" << endl;
-        while (getline(file, line)) {
-            stringstream ss(line);
-            string namaTim, namaKetua, namaWakil, visi, misi;
-
-            // Membaca data dari baris CSV
-            getline(ss, namaTim, ',');
-            getline(ss, namaKetua, ',');
-            getline(ss, namaWakil, ',');
-            getline(ss, visi, ',');
-            getline(ss, misi, ',');
-
-            // Menampilkan data kandidat
-            cout << "Nama Tim: " << namaTim << endl;
-            cout << "Nama Ketua: " << namaKetua << endl;
-            cout << "Nama Wakil Ketua: " << namaWakil << endl;
-            cout << "Visi: " << visi << endl;
-            cout << "Misi: " << misi << endl;
-            cout << "-------------------------" << endl;
-        }
-        file.close();
-    } else {
-        cout << "Gagal membuka file calon_kandidat.csv!" << endl;
+        cout << "Gagal membuka file kandidat.csv!" << endl;
     }
 }
 
@@ -167,48 +132,79 @@ void editInformasiKandidat(const string &namaTim, Kandidat &kandidat) {
     }
 }
 
-// int main() {
-//     Kandidat kandidat;
-//     bool sudahTerdaftar = false;
-//     string namaTim;
 
-//     while (true) {
-//         cout << "Masukkan nama Tim Sukses: ";
-//         getline(cin, namaTim);
+// Fungsi untuk melaporkan gugatan paslon
+void laporGugatanPaslon(const string &namaTim) {
+    if (namaTim.empty()) {
+        cout << "Kamu belum menambahkan Nama timsukses" << endl;
+        return; // Keluar dari fungsi jika nama tim kosong
+    }
 
-//         if (!namaTim.empty()) {
-//             break;
-//         } else {
-//             cout << "Nama Tim Sukses tidak boleh kosong. Silakan coba lagi." << endl;
-//         }
-//     }
+    string pasanganNomor, isiGugatan;
+    cout << "=== Form Lapor Gugatan Paslon ===" << endl;
+    cout << "Masukkan laporan gugatan untuk pasangan nomor: ";
+    getline(cin, pasanganNomor);
+    cout << "Isi Gugatan: ";
+    getline(cin, isiGugatan);
 
-//     while (true) {
-//         tampilkanMenu();
-//         int pilihan;
-//         cin >> pilihan;
-//         cin.ignore(); // Membersihkan buffer input
+    // Format nama tim sukses penggugat
+    string timPenggugat = namaTim + "_penggugat";
+    string timTergugat = pasanganNomor + "_tergugat";
+    // Simpan laporan ke file laporan_gugatan.csv
+    ofstream file("laporan_gugatan.csv", ios::app); // Membuka file dalam mode append
+    if (file.is_open()) {
+        file << timPenggugat << "," << timTergugat << "," << isiGugatan << endl;
+        file.close();
+        cout << "Laporan gugatan berhasil disimpan ke laporan_gugatan.csv!" << endl;
+    } else {
+        cout << "Gagal membuka file laporan_gugatan.csv!" << endl;
+    }
+}
 
-//         if (pilihan == 1) {
-//             if (sudahTerdaftar) {
-//                 cout << "Anda sudah mendaftarkan pasangan kandidat. Tidak dapat mendaftarkan lagi." << endl;
-//             } else {
-//                 daftarkanKandidat(kandidat);
-//                 sudahTerdaftar = true;
-//             }
-//         } else if (pilihan == 2) {
-//             buatVisiMisi(namaTim, kandidat);
-//         } else if (pilihan == 3) {
-//             editInformasiKandidat(namaTim, kandidat);
-//         } else if (pilihan == 4) {
-//             cout << "Keluar dari program." << endl;
-//             break;
-//         } else {
-//             cout << "Pilihan tidak valid. Silakan coba lagi." << endl;
-//         }
+int main() {
+    Kandidat kandidat;
+    bool sudahTerdaftar = false;
+    string namaTim;
 
-//         cout << endl;
-//     }
+    while (true) {
+        cout << "Masukkan nama Tim Sukses: ";
+        getline(cin, namaTim);
 
-//     return 0;
-// }
+        if (!namaTim.empty()) {
+            break;
+        } else {
+            cout << "Nama Tim Sukses tidak boleh kosong. Silakan coba lagi." << endl;
+        }
+    }
+
+    while (true) {
+        tampilkanMenu();
+        int pilihan;
+        cin >> pilihan;
+        cin.ignore(); // Membersihkan buffer input
+
+        if (pilihan == 1) {
+            if (sudahTerdaftar) {
+                cout << "Anda sudah mendaftarkan pasangan kandidat. Tidak dapat mendaftarkan lagi." << endl;
+            } else {
+                daftarkanKandidat(kandidat);
+                sudahTerdaftar = true;
+            }
+        } else if (pilihan == 2) {
+            buatVisiMisi(namaTim, kandidat);
+        } else if (pilihan == 3) {
+            editInformasiKandidat(namaTim, kandidat);
+        } else if (pilihan == 4) {
+            laporGugatanPaslon(namaTim);
+        } else if (pilihan == 5) {
+            cout << "Keluar dari program." << endl;
+            break;
+        } else {
+            cout << "Pilihan tidak valid. Silakan coba lagi." << endl;
+        }
+
+        cout << endl;
+    }
+
+    return 0;
+}r
