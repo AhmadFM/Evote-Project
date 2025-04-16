@@ -10,7 +10,7 @@ struct calon{
     string timSukses;
     string ketua;
     string wakil;
-    int count;
+    int count = 0;
     calon *next;
 };
 
@@ -99,14 +99,14 @@ bool waktuHasil(time_t waktuAkhir, time_t sekarang = time(0)){
 void cetakHasilHitungSuara(){
     if (!isEmpty())
     {
-        current = head;
-        while (current!=NULL)
+        calon* cr = head;
+        while (cr!=NULL)
         {
-            cout << current->timSukses << ".|";
-            cout << current->ketua << "\t&\t";
-            cout << current->wakil << "\t| ";
-            cout << current->count << " Suara" << endl;
-            current = current -> next;
+            cout << cr->timSukses << ".|";
+            cout << cr->ketua << "\t&\t";
+            cout << cr->wakil << "\t| ";
+            cout << cr->count << " Suara" << endl;
+            cr = cr -> next;
         }
     }
 }
@@ -169,6 +169,13 @@ void voting(time_t start, time_t end, time_t now, string username){
     }
 }
 void hitungSuara(){
+    calon* cr = head;
+    while (cr != NULL)
+    {
+        cr->count = 0;
+        cr = cr->next;
+    }
+
     ifstream file("suara.csv");
     string line;
     while (getline(file, line)){
@@ -186,6 +193,7 @@ void hitungSuara(){
                 current -> count = current -> count + 1;
                 break;
             }
+            noUrut++;
         }
     }
 } 
@@ -193,6 +201,8 @@ void hitungSuara(){
 // Lihat Jumlah Suara
 void lihatJumlahSuara(time_t end = time(0)){
     if (waktuHasil(end)){
+        head = NULL;
+        
         ifstream file("confirmedKandidat.csv");
         string line, no, Ketua, Wakil;
         while(getline(file, line)) {
