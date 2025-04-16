@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
+#include<ctime>
 #include "menuUtama.hpp"
+#include "pemilih.hpp"
 
 using namespace std;
 
@@ -87,17 +89,21 @@ void menuPemilih()
         cout << "0. Keluar\n";
         cout << "Pilih opsi: ";
         cin >> pilihan;
+        time_t waktu = time(0);
 
         switch (pilihan)
         {
             case 1:
                 cout << "Voting\n";
+                voting(waktu,waktu,waktu); //isi perameter waktu yang sesuai
                 break;
-            case 2:
+                case 2:
                 cout << "Cek hasil pemilu\n";
+                lihatJumlahSuara(waktu);
                 break;
             case 3:
                 cout << "Lapor kecurangan\n";
+                laporKecurangan();
                 break;
             case 0:
                 cout << "Kembali ke menu utama\n";
