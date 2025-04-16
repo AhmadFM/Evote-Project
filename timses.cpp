@@ -167,48 +167,48 @@ void editInformasiKandidat(const string &namaTim, Kandidat &kandidat) {
     }
 }
 
-int main() {
-    Kandidat kandidat;
-    bool sudahTerdaftar = false;
-    string namaTim;
+// int main() {
+//     Kandidat kandidat;
+//     bool sudahTerdaftar = false;
+//     string namaTim;
 
-    while (true) {
-        cout << "Masukkan nama Tim Sukses: ";
-        getline(cin, namaTim);
+//     while (true) {
+//         cout << "Masukkan nama Tim Sukses: ";
+//         getline(cin, namaTim);
 
-        if (!namaTim.empty()) {
-            break;
-        } else {
-            cout << "Nama Tim Sukses tidak boleh kosong. Silakan coba lagi." << endl;
-        }
-    }
+//         if (!namaTim.empty()) {
+//             break;
+//         } else {
+//             cout << "Nama Tim Sukses tidak boleh kosong. Silakan coba lagi." << endl;
+//         }
+//     }
 
-    while (true) {
-        tampilkanMenu();
-        int pilihan;
-        cin >> pilihan;
-        cin.ignore(); // Membersihkan buffer input
+//     while (true) {
+//         tampilkanMenu();
+//         int pilihan;
+//         cin >> pilihan;
+//         cin.ignore(); // Membersihkan buffer input
 
-        if (pilihan == 1) {
-            if (sudahTerdaftar) {
-                cout << "Anda sudah mendaftarkan pasangan kandidat. Tidak dapat mendaftarkan lagi." << endl;
-            } else {
-                daftarkanKandidat(kandidat);
-                sudahTerdaftar = true;
-            }
-        } else if (pilihan == 2) {
-            buatVisiMisi(namaTim, kandidat);
-        } else if (pilihan == 3) {
-            editInformasiKandidat(namaTim, kandidat);
-        } else if (pilihan == 4) {
-            cout << "Keluar dari program." << endl;
-            break;
-        } else {
-            cout << "Pilihan tidak valid. Silakan coba lagi." << endl;
-        }
+//         if (pilihan == 1) {
+//             if (sudahTerdaftar) {
+//                 cout << "Anda sudah mendaftarkan pasangan kandidat. Tidak dapat mendaftarkan lagi." << endl;
+//             } else {
+//                 daftarkanKandidat(kandidat);
+//                 sudahTerdaftar = true;
+//             }
+//         } else if (pilihan == 2) {
+//             buatVisiMisi(namaTim, kandidat);
+//         } else if (pilihan == 3) {
+//             editInformasiKandidat(namaTim, kandidat);
+//         } else if (pilihan == 4) {
+//             cout << "Keluar dari program." << endl;
+//             break;
+//         } else {
+//             cout << "Pilihan tidak valid. Silakan coba lagi." << endl;
+//         }
 
-        cout << endl;
-    }
+//         cout << endl;
+//     }
 
-    return 0;
-}
+//     return 0;
+// }
