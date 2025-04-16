@@ -188,7 +188,11 @@ void lihatJumlahSuara(time_t end = time(0)){
 
 // MAIN Lapor Kecurangan
 void laporKecurangan (){
-    // proc
+    string judul, referensi, deskripsi;
+    cout << "==== Formulir Laporan Kecurangan ====" << endl;
+    cout << "Judul: "; getline(cin, judul);
+    cout << "Link bukti: "; getline(cin, referensi);
+    cout << "Deskripsi: "; getline(cin, deskripsi);
 }
 
 // int main(){
