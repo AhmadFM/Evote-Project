@@ -21,7 +21,7 @@ void tampilkanMenu() {
 
 // simpan data kandidat kedalam file kandidat.csv
 void simpanKeCSV(const string &namaTim, const Kandidat &kandidat, const string &visi, const string &misi) {
-    ofstream file("kandidat.csv", ios::app); // Membuka file dalam mode append
+    ofstream file("calon_kandidat.csv", ios::app); // Membuka file dalam mode append
     if (file.is_open()) {
         file << namaTim << "," << kandidat.namaKetua << "," << kandidat.namaWakilKetua << "," << visi << "," << misi << endl;
         file.close();
@@ -58,8 +58,8 @@ void buatVisiMisi(const string &namaTim, const Kandidat &kandidat) {
 
 // update csv (rewrite)
 void perbaruiCSV(const string &namaTim, const Kandidat &kandidat) {
-    ifstream fileInput("kandidat.csv");
-    ofstream fileOutput("kandidat_temp.csv");
+    ifstream fileInput("calon_kandidat.csv");
+    ofstream fileOutput("calon_kandidat_temp.csv");
     bool ditemukan = false;
 
     if (fileInput.is_open() && fileOutput.is_open()) {
@@ -132,6 +132,7 @@ void editInformasiKandidat(const string &namaTim, Kandidat &kandidat) {
     }
 }
 
+
 // Fungsi untuk melaporkan gugatan paslon
 void laporGugatanPaslon(const string &namaTim) {
     if (namaTim.empty()) {
@@ -160,50 +161,49 @@ void laporGugatanPaslon(const string &namaTim) {
     }
 }
 
-// int main() {
-//     Kandidat kandidat;
-//     bool sudahTerdaftar = false;
-//     string namaTim;
+void main_timses() {
+    Kandidat kandidat;
+    bool sudahTerdaftar = false;
+    string namaTim;
 
-//     while (true) {
-//         cout << "Masukkan nama Tim Sukses: ";
-//         getline(cin, namaTim);
+    while (true) {
+        cout << "Masukkan nama Tim Sukses: ";
+        getline(cin, namaTim);
 
-//         if (!namaTim.empty()) {
-//             break;
-//         } else {
-//             cout << "Nama Tim Sukses tidak boleh kosong. Silakan coba lagi." << endl;
-//         }
-//     }
+        if (!namaTim.empty()) {
+            break;
+        } else {
+            cout << "Nama Tim Sukses tidak boleh kosong. Silakan coba lagi." << endl;
+        }
+    }
 
-//     while (true) {
-//         tampilkanMenu();
-//         int pilihan;
-//         cin >> pilihan;
-//         cin.ignore(); // Membersihkan buffer input
+    while (true) {
+        tampilkanMenu();
+        int pilihan;
+        cin >> pilihan;
+        cin.ignore(); // Membersihkan buffer input
 
-//         if (pilihan == 1) {
-//             if (sudahTerdaftar) {
-//                 cout << "Anda sudah mendaftarkan pasangan kandidat. Tidak dapat mendaftarkan lagi." << endl;
-//             } else {
-//                 daftarkanKandidat(kandidat);
-//                 sudahTerdaftar = true;
-//             }
-//         } else if (pilihan == 2) {
-//             buatVisiMisi(namaTim, kandidat);
-//         } else if (pilihan == 3) {
-//             editInformasiKandidat(namaTim, kandidat);
-//         } else if (pilihan == 4) {
-//             laporGugatanPaslon(namaTim);
-//         } else if (pilihan == 5) {
-//             cout << "Keluar dari program." << endl;
-//             break;
-//         } else {
-//             cout << "Pilihan tidak valid. Silakan coba lagi." << endl;
-//         }
+        if (pilihan == 1) {
+            if (sudahTerdaftar) {
+                cout << "Anda sudah mendaftarkan pasangan kandidat. Tidak dapat mendaftarkan lagi." << endl;
+            } else {
+                daftarkanKandidat(kandidat);
+                sudahTerdaftar = true;
+            }
+        } else if (pilihan == 2) {
+            buatVisiMisi(namaTim, kandidat);
+        } else if (pilihan == 3) {
+            editInformasiKandidat(namaTim, kandidat);
+        } else if (pilihan == 4) {
+            laporGugatanPaslon(namaTim);
+        } else if (pilihan == 5) {
+            cout << "Keluar dari program." << endl;
+            break;
+        } else {
+            cout << "Pilihan tidak valid. Silakan coba lagi." << endl;
+        }
 
-//         cout << endl;
-//     }
+        cout << endl;
+    }
 
-//     return 0;
-// }
+}
