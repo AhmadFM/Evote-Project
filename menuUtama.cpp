@@ -64,7 +64,6 @@ void menuPemilih(string username)
         cout << "\n ======= Menu Pemilih =======\n";
         cout << "1. Voting\n";
         cout << "2. Cek hasil pemilu\n";
-        cout << "3. Lapor kecurangan\n";
         cout << "0. Keluar\n";
         cout << "Pilih opsi: ";
         cin >> pilihan;
@@ -103,10 +102,6 @@ void menuPemilih(string username)
             case 2:
                 cout << "Cek hasil pemilu\n";
                 lihatJumlahSuara(now_date);
-                break;
-            case 3:
-                cout << "Lapor kecurangan\n";
-                laporKecurangan();
                 break;
             case 0:
                 cout << "Kembali ke menu utama\n";

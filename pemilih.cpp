@@ -218,11 +218,6 @@ void lihatJumlahSuara(time_t end = time(0)){
     }
 }
 
-// MAIN Lapor Kecurangan
-void laporKecurangan (){
-    // proc
-}
-
 // int main(){
 //     do {
 //         voting();
