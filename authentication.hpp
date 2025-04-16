@@ -1,7 +1,7 @@
 #ifndef AUTHENTICATION_HPP
 #define AUTHENTICATION_HPP
 
-// #include <std::string>
+#include <string>
 // #include <iostream>
 // #include <fstream>
 // #include <sstream>
