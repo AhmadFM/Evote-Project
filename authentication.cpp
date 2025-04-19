@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <cctype>
+#include <conio.h> // password asterisk
 #include "authentication.hpp"
 using namespace std;
 
@@ -190,6 +191,26 @@ void verifPaslon() {
     // cek timsesnya apakah sama atau tidak -> sama = gagal
     // apakah data paslon sesuai dengan ketentuan yang ada pada panitia
 }
+
+std::string inputPassword() {
+    std::string password;
+    char ch;
+
+    while ((ch = _getch()) != 13) { // 13 = Enter
+        if (ch == 8) { // Backspace
+            if (!password.empty()) {
+                password.pop_back();
+                std::cout << "\b \b";
+            }
+        } else {
+            password += ch;
+            std::cout << '*';
+        }
+    }
+    std::cout << std::endl;
+    return password;
+}
+
 
 // int main() {
 //     string name, password;

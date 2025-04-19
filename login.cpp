@@ -14,7 +14,8 @@ void login()
     cout << "Username: ";
     cin >> username;
     cout << "Password: ";
-    cin >> password;
+    password = inputPassword(); 
+
 
    string check = verifLogin(username, password);
 
