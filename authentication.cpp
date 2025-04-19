@@ -135,7 +135,7 @@ bool verifRegister(string nama, string password, string jenis) {
     }
 
     if (!validPassword(jenis, password)) {
-        cout << "Password tidak sesuai" << endl;
+        cout << "Password untuk Panitia/Timses Harus lebih dari 8 dan Kurang dari 12! Coba Lagi." << endl;
         return false;
     }
 
