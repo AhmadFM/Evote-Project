@@ -301,7 +301,7 @@ void ubahKetentuan()
         {
             cout << "| Tanggal: ";
             cin >> day;
-            if ((day < start_date.tm_mday) && (month -1 <= start_date.tm_mon)){
+            if ((day < start_date.tm_mday) && (month -1 <= start_date.tm_mon) && (year - 1900 <= start_date.tm_year)){
                 cout << "tanggal tidak valid, harus lebih besar dari tanggal mulai voting\n";
                 continue;
             }
@@ -315,7 +315,7 @@ void ubahKetentuan()
         {
             cout << "| Jam: ";
             cin >> hour; 
-            if ((hour < start_date.tm_hour) && (day <= start_date.tm_mday)){
+            if ((hour < start_date.tm_hour) && (day <= start_date.tm_mday) && (month - 1 <= start_date.tm_mon) && (year - 1900 <= start_date.tm_year)){
                 cout << "jam tidak valid, harus lebih besar dari jam mulai voting\n";
                 continue;
             }
@@ -329,7 +329,7 @@ void ubahKetentuan()
         {
             cout << "| Menit: ";
             cin >> minute; 
-            if ((minute < start_date.tm_min) && (hour <= start_date.tm_hour)){
+            if ((minute < start_date.tm_min) && (hour <= start_date.tm_hour)&&(day <= start_date.tm_mday)&&(month - 1 <= start_date.tm_mon)&&(year - 1900 <= start_date.tm_year)){
                 cout << "menit tidak valid, harus lebih besar dari menit mulai voting\n";
                 continue;
             }
@@ -343,7 +343,7 @@ void ubahKetentuan()
         {
             cout << "| Detik: ";
             cin >> seconds;
-            if ((seconds <= start_date.tm_sec) && (minute <= start_date.tm_min)){
+            if ((seconds <= start_date.tm_sec) && (minute <= start_date.tm_min)&&(hour <= start_date.tm_hour)&&(day <= start_date.tm_mday)&&(month - 1 <= start_date.tm_mon)&&(year - 1900 <= start_date.tm_year)){
                 cout << "detik tidak valid, harus lebih besar dari detik mulai voting\n";
                 continue;
             }
@@ -459,25 +459,30 @@ void verifikasiKandidat()
     writeKandidat(headKandidatConfirmed);
 }
 
-void lihatLaporanGugatan()
-{
-    cout << "\n+---------------------------------------+" << endl;
-    cout << "|         Lihat Laporan Gugatan         |" << endl;
-    cout << "+---------------------------------------+" << endl;
-
-    laporanGugatan* headLaporan = readLaporanGugatan();
-    laporanGugatan* currentLaporan = headLaporan;
-
-    int noUrut = 1;
-    while (currentLaporan != NULL)
-    {
-        cout << noUrut << ". \n";
-        cout << "| Penggugat: " << currentLaporan->penggugat << "\n";
-        cout << "| Tergugat: " << currentLaporan->tergugat << "\n";
-        cout << "| Teks: " << currentLaporan->teks << "\n\n";
-
-        noUrut++;
-        currentLaporan = currentLaporan->next;
+void lihatLaporanGugatan(){   
+    string check = "Tidak";
+    while (check != "Ya"){
         system("cls");
+        cout << "+---------------------------------------+" << endl;
+        cout << "|         Lihat Laporan Gugatan         |" << endl;
+        cout << "+---------------------------------------+" << endl;
+
+        laporanGugatan* headLaporan = readLaporanGugatan();
+        laporanGugatan* currentLaporan = headLaporan;
+        
+        int noUrut = 1;
+        
+        while (currentLaporan != NULL){
+            cout << noUrut << ". \n";
+            cout << "| Penggugat: " << currentLaporan->penggugat << "\n";
+            cout << "| Tergugat: " << currentLaporan->tergugat << "\n";
+            cout << "| Teks: " << currentLaporan->teks << "\n\n";
+            
+            noUrut++;
+            currentLaporan = currentLaporan->next;
+        }
+        cout << "Selesai membaca? (Ya/Tidak) >>> ";
+        cin >> check;
     }
+    system("cls");
 }

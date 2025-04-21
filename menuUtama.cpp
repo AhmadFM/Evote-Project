@@ -28,7 +28,7 @@ void menuPanitia()
         cout << "+---------------------------------------+" << endl;
         cout << "Pilih opsi >>> ";
         cin >> pilihan;
-        system("cls");
+        // system("cls");
 
         switch (pilihan)
         {
