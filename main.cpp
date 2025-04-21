@@ -2,6 +2,7 @@
 #include <string>
 #include "register.hpp"
 #include "login.hpp"
+#include <windows.h>
 
 using namespace std;
 
@@ -21,6 +22,7 @@ int main()
         cout << "+---------------------------------------+" << endl;
         cout << "Pilih Opsi >>> ";
         cin >> pilihan;
+        system("cls");
 
         switch (pilihan)
         {
@@ -37,7 +39,7 @@ int main()
                 break;
             default:
                 cout << "\n+---------------------------------------+" << endl;
-                cout << "|      Masukan pilihan yang sesuai      |";
+                cout << "|      Masukan pilihan yang sesuai      |" << endl;
                 cout << "+---------------------------------------+" << endl;
         }
 

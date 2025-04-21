@@ -3,6 +3,7 @@
 #include <sstream>
 #include <vector>
 #include <ctime>
+#include <windows.h>
 // #include <vector>
 #include "panitia.hpp"
 
@@ -24,6 +25,7 @@ paslon* readKandidat()
     ifstream file("./calon_kandidat.csv");
     
     if (!file.is_open()) {
+        system("cls");
         cout << "\n+---------------------------------------+" << endl;
         cerr << "|          Failed to open file          |" << endl;
         cout << "+---------------------------------------+" << endl;
@@ -84,6 +86,7 @@ bool writeKandidat(paslon* headKandidat)
     ofstream file("./confirmedKandidat.csv");
     
     if (!file.is_open()) {
+        system("cls");
         cout << "\n+---------------------------------------+" << endl;
         cerr << "|          Failed to open file          |" << endl;
         cout << "+---------------------------------------+" << endl;
@@ -122,6 +125,7 @@ laporanGugatan* readLaporanGugatan()
     ifstream file("./laporan_gugatan.csv");
     
     if (!file.is_open()) {
+        system("cls");
         cout << "\n+---------------------------------------+" << endl;
         cerr << "|          Failed to open file          |" << endl;
         cout << "+---------------------------------------+" << endl;
@@ -309,11 +313,13 @@ void ubahKetentuan()
         end_date.tm_min = minute; 
         end_date.tm_sec = seconds;
         end_date.tm_isdst = -1;
+        system("cls");
     }
 
     ofstream file("./ketentuan.txt");
     
     if (!file.is_open()) {
+        system("cls");
         cout << "\n+---------------------------------------+" << endl;
         cerr << "|          Failed to open file          |" << endl;
         cout << "+---------------------------------------+" << endl;
@@ -362,6 +368,7 @@ void verifikasiKandidat()
             cin >> konfirmasi;
             if (konfirmasi == "Ya")
             {
+                system("cls");
                 cout << "\n+---------------------------------------+" << endl;
                 cout << "|          Kandidat diterima!           |" << endl;
                 cout << "+---------------------------------------+" << endl;
@@ -389,6 +396,7 @@ void verifikasiKandidat()
             }
             else if (konfirmasi == "Tidak")
             {
+                system("cls");
                 cout << "\n+---------------------------------------+" << endl;
                 cout << "|           Kandidat ditolak!           |" << endl;
                 cout << "+---------------------------------------+" << endl;
@@ -422,5 +430,6 @@ void lihatLaporanGugatan()
 
         noUrut++;
         currentLaporan = currentLaporan->next;
+        system("cls");
     }
 }
