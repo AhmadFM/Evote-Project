@@ -205,62 +205,71 @@ void ubahKetentuan()
     cout << "|         Ubah Ketentuan Voting         |" << endl;
     cout << "+---------------------------------------+" << endl;
 
-    cout << "| 1. Kapan mulai voting? \n";
-    struct tm start_date;
-    {
-        int year = 0;
-        int month = 0;
-        int day = 0;
-        int hour = 0;
-        int minute = 0;
-        int seconds = 0;
+    time_t start_timestamp = time(NULL);
+    struct tm current_date = *localtime(&start_timestamp);
 
-        while (true) {
-            cout << "| Tahun: ";
-            cin >> year; 
-            if (year > 1901) break;
-        }
-        while (true)
-        {
-            cout << "| Bulan: ";
-            cin >> month; 
-            if (month > 0 && month < 13) break;
-        }
-        while (true)
-        {
-            cout << "| Tanggal: ";
-            cin >> day;
-            if (day > 0 && day < 32) break;
-        }
-        while (true)
-        {
-            cout << "| Jam: ";
-            cin >> hour; 
-            if (hour > -1 && hour < 24) break;
-        }
-        while (true)
-        {
-            cout << "| Menit: ";
-            cin >> minute; 
-            if (minute > -1 && minute < 60) break;
-        }
-        while (true)
-        {
-            cout << "| Detik: ";
-            cin >> seconds;
-            if (seconds > -1 && seconds < 60) break;
-        }
+    // cout << "| 1. Kapan mulai voting? \n";
+    // struct tm start_date;
+    // {
+    //     int year = 0;
+    //     int month = 0;
+    //     int day = 0;
+    //     int hour = 0;
+    //     int minute = 0;
+    //     int seconds = 0;
 
-        start_date.tm_year = year - 1900;
-        start_date.tm_mon = month - 1;
-        start_date.tm_mday = day;
-        start_date.tm_hour = hour; 
-        start_date.tm_min = minute; 
-        start_date.tm_sec = seconds;
-        start_date.tm_isdst = -1;
-    }
+    //     while (true) {
+    //         cout << "| Tahun: ";
+    //         cin >> year; 
+    //         if (year > 1901) break;
+    //     }
+    //     while (true)
+    //     {
+    //         cout << "| Bulan: ";
+    //         cin >> month; 
+    //         if (month > 0 && month < 13) break;
+    //     }
+    //     while (true)
+    //     {
+    //         cout << "| Tanggal: ";
+    //         cin >> day;
+    //         if (day > 0 && day < 32) break;
+    //     }
+    //     while (true)
+    //     {
+    //         cout << "| Jam: ";
+    //         cin >> hour; 
+    //         if (hour > -1 && hour < 24) break;
+    //     }
+    //     while (true)
+    //     {
+    //         cout << "| Menit: ";
+    //         cin >> minute; 
+    //         if (minute > -1 && minute < 60) break;
+    //     }
+    //     while (true)
+    //     {
+    //         cout << "| Detik: ";
+    //         cin >> seconds;
+    //         if (seconds > -1 && seconds < 60) break;
+    //     }
 
-    cout << "| 2. Kapan selesai voting? \n";
+    //     start_date.tm_year = year - 1900;
+    //     start_date.tm_mon = month - 1;
+    //     start_date.tm_mday = day;
+    //     start_date.tm_hour = hour; 
+    //     start_date.tm_min = minute; 
+    //     start_date.tm_sec = seconds;
+    //     start_date.tm_isdst = -1;
+    // }
+
+    cout << "| Waktu voting dimulai pada waktu saat ini \n";
+    cout << "| * Tahun: " << current_date.tm_year + 1900 << "\n";
+    cout << "| * Bulan: " << current_date.tm_mon + 1 << "\n";
+    cout << "| * Tanggal: " << current_date.tm_mday << "\n";
+    cout << "| * Jam Menit: " << current_date.tm_hour << ":" << current_date.tm_min << "\n\n";
+
+    cout << "| Kapan selesai voting? (tidak boleh kurang dari waktu mulai voting) \n";
     struct tm end_date;
     {
         int year = 0;
@@ -268,42 +277,51 @@ void ubahKetentuan()
         int day = 0;
         int hour = 0;
         int minute = 0;
-        int seconds = 0;
 
         while (true) {
             cout << "| Tahun: ";
             cin >> year; 
-            if (year > 1901) break;
+            if (year >= current_date.tm_year + 1900) break;
         }
         while (true)
         {
             cout << "| Bulan: ";
-            cin >> month; 
-            if (month > 0 && month < 13) break;
+            cin >> month;
+            if (year == current_date.tm_year + 1900)
+            {
+                if (month >= current_date.tm_mon + 1 && month < 13) break;
+            }
+            else if (month > 0 && month < 13) break;
         }
         while (true)
         {
             cout << "| Tanggal: ";
             cin >> day;
-            if (day > 0 && day < 32) break;
+            if (year == current_date.tm_year + 1900 && month == current_date.tm_mon + 1)
+            {
+                if (day >= current_date.tm_mday && day < 32) break;
+            }
+            else if (day > 0 && day < 32) break;
         }
         while (true)
         {
             cout << "| Jam: ";
-            cin >> hour; 
-            if (hour > -1 && hour < 24) break;
+            cin >> hour;
+            if (year == current_date.tm_year + 1900 && month == current_date.tm_mon + 1 && day == current_date.tm_mday)
+            {
+                if (hour >= current_date.tm_hour && hour < 24) break;
+            }
+            else if (hour > 0 && hour < 24) break;
         }
         while (true)
         {
             cout << "| Menit: ";
             cin >> minute; 
-            if (minute > -1 && minute < 60) break;
-        }
-        while (true)
-        {
-            cout << "| Detik: ";
-            cin >> seconds;
-            if (seconds > -1 && seconds < 60) break;
+            if (year == current_date.tm_year + 1900 && month == current_date.tm_mon + 1 && day == current_date.tm_mday && hour == current_date.tm_hour)
+            {
+                if (minute >= current_date.tm_min && minute < 60) break;
+            }
+            else if (minute > -1 && minute < 60) break;
         }
     
         end_date.tm_year = year - 1900;
@@ -311,7 +329,7 @@ void ubahKetentuan()
         end_date.tm_mday = day;
         end_date.tm_hour = hour; 
         end_date.tm_min = minute; 
-        end_date.tm_sec = seconds;
+        end_date.tm_sec = 0;
         end_date.tm_isdst = -1;
         system("cls");
     }
@@ -326,7 +344,7 @@ void ubahKetentuan()
         return;
     }
 
-    time_t start_timestamp = mktime(&start_date);
+    // time_t start_timestamp = mktime(&start_date);
     time_t end_timestamp = mktime(&end_date);
 
     file << start_timestamp << "\n" << end_timestamp;
