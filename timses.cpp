@@ -234,6 +234,7 @@ void main_timses() {
         int pilihan;
         cin >> pilihan;
         cin.ignore(); // Membersihkan buffer input
+        system("cls");
 
         if (pilihan == 1) {
             if (sudahTerdaftar) {
@@ -253,9 +254,6 @@ void main_timses() {
             laporGugatanPaslon(namaTim);
         } else if (pilihan == 5) {
             system("cls");
-            cout << "\n+---------------------------------------+" << endl;
-            cout << "|          Keluar dari program.         |" << endl;
-            cout << "+---------------------------------------+" << endl;
             break;
         } else {
             system("cls");

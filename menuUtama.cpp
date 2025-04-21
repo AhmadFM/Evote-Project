@@ -42,7 +42,7 @@ void menuPanitia()
                 lihatLaporanGugatan();
                 break;
             case 0:
-                cout << "Kembali ke menu utama\n";
+                break;
             
         }
     } while (pilihan != 0);
