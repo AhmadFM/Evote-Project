@@ -108,10 +108,11 @@ void cetakHasilHitungSuara(){
         calon* cr = head;
         while (cr!=NULL)
         {
-            cout << cr->timSukses << ".|";
-            cout << cr->ketua << "\t&\t";
-            cout << cr->wakil << "\t| ";
-            cout << cr->count << " Suara" << endl;
+            cout << "| " << cr->timSukses << " | ";
+            cout << cr->ketua << " & ";
+            cout << cr->wakil << " | ";
+            cout << cr->count << " Suara\t|" << endl;
+            cout << "+---------------------------------------+" << endl;
             cr = cr -> next;
         }
     }
