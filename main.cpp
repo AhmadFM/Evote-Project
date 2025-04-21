@@ -11,11 +11,15 @@ int main()
 
     do
     {
-        cout << "\n ================== Sistem Pemilihan Umum E-Vote ==================\n";
-        cout << "1. Register\n";
-        cout << "2. Login\n";
-        cout << "0. Keluar\n";
-        cout << "Pilih Opsi: \n";
+        cout << "\n+---------------------------------------+" << endl;
+        cout << "|      Sistem Pemilihan Umum E-Vote     |" << endl;
+        cout << "+---------------------------------------+" << endl;
+        cout << "| 1. Register                           |" << endl;
+        cout << "| 2. Login                              |" << endl;
+        cout << "|                                       |" << endl;
+        cout << "| 0. Keluar                             |" << endl;
+        cout << "+---------------------------------------+" << endl;
+        cout << "Pilih Opsi >>> ";
         cin >> pilihan;
 
         switch (pilihan)
@@ -27,10 +31,14 @@ int main()
                 login();
                 break;
             case 0:
-                cout << "Terima kasih telah meluangkan waktu Anda\n";
+                cout << "\n+---------------------------------------+" << endl;
+                cout << "| Terima kasih telah menggunakan Evote! |\n";
+                cout << "+---------------------------------------+" << endl;
                 break;
             default:
-                cout << "Pilihan tidak valid. Silahkan coba lagi.\n";
+                cout << "\n+---------------------------------------+" << endl;
+                cout << "|      Masukan pilihan yang sesuai      |";
+                cout << "+---------------------------------------+" << endl;
         }
 
     } while (pilihan != 0);

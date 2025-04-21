@@ -55,7 +55,9 @@ bool confirm(){
         }else if(yakin == "N" || yakin == "n"){
             return 0;
         }
-        cout << "Maaf, input tidak sesuai" << endl;
+        cout << "\n+---------------------------------------+" << endl;
+        cout << "|       Maaf, input tidak sesuai        |" << endl;
+        cout << "+---------------------------------------+" << endl;
     }
     return 0;
 }
@@ -65,8 +67,10 @@ int suratSuara(){
     string line, ketua, wakil, visi, misi, timSukses;
 
     int noUrut = 1;
-    
-    cout << "===== Surat Suara =====\n";
+
+    cout << "\n+---------------------------------------+" << endl;
+    cout << "|              Surat Suara              |\n";
+    cout << "+---------------------------------------+" << endl;
     while(getline(file, line)) {
         stringstream ss(line);
         while (getline(ss, timSukses, ',')) {
@@ -74,12 +78,12 @@ int suratSuara(){
             getline(ss, wakil, ',');
             getline(ss, visi, ',');
             getline(ss, misi, ',');
-            cout << noUrut << endl;
-            cout << timSukses << endl;
-            cout << ketua << " & " << wakil << endl;
-            cout << "visi : " << visi << endl; 
-            cout << "misi : " << misi << endl;
-            cout << "-----------------------\n";
+            cout << "| " << noUrut << endl;
+            cout << "| " << timSukses << endl;
+            cout << "| " << ketua << " & " << wakil << endl;
+            cout << "| Visi : " << visi << endl; 
+            cout << "| Misi : " << misi << endl;
+            cout << "+---------------------------------------+" << endl;
         }
         noUrut++;
     }
@@ -132,7 +136,9 @@ void kirimSuara(int no_urut, string username, time_t date)
 
         file.close();
     } else {
-        cout << "Gagal membuka file.\n";
+        cout << "\n+---------------------------------------+" << endl;
+        cout << "|          Gagal membuka file1          |\n";
+        cout << "+---------------------------------------+" << endl;
     }
 }
 
@@ -160,16 +166,20 @@ void voting(time_t start, time_t end, time_t now, string username){
         if (waktuVoting(start, end, now)){
         bool cek = false;
         do {
-            cout << "\n===== Selamat Memilih =====\n";
+            cout << "\n+---------------------------------------+" << endl;
+            cout << "|            Selamat Memilih            |\n";
+            cout << "+---------------------------------------+" << endl;
             int jumlahPaslon = suratSuara();
             int pilih; 
             while (true){
-                cout << "Pilih nomor urut kandidat pilihan Anda: "; 
+                cout << "| Pilih nomor urut kandidat pilihan Anda: "; 
                 cin >> pilih;
                 if (pilih > 0 && pilih < jumlahPaslon){
                     break;
                 } else{
-                    cout << "Maaf, input tidak sesuai" << endl;
+                    cout << "\n+---------------------------------------+" << endl;
+                    cout << "|       Maaf, input tidak sesuai        |" << endl;
+                    cout << "+---------------------------------------+" << endl;
                 }
                 
             }
@@ -181,9 +191,12 @@ void voting(time_t start, time_t end, time_t now, string username){
                 cek = false;
             }
         } while(cek != true);
-        cout << "Terima kasih, telah menggunakan hak suara Anda!" << endl;
+        cout << "\n+-------------------------------------------------+" << endl;
+        cout << "| Terima kasih, telah menggunakan hak suara Anda! |" << endl;
+        cout << "+-------------------------------------------------+" << endl;
     } else{
-        cout << "Maaf, waktu memilih tidak sesuai!\n";
+        cout << "\n+---------------------------------------+" << endl;
+        cout << "| Maaf, waktu memilih tidak sesuai! |\n";
         return;
     }
 }
@@ -238,11 +251,15 @@ void lihatJumlahSuara(time_t end = time(0)){
         }
         
         hitungSuara();
-        cout << "==== Hasil Akumulasi Voting ====" << endl;
+        cout << "\n+---------------------------------------+" << endl;
+        cout << "|        Hasil Akumulasi Voting         |" << endl;
+        cout << "+---------------------------------------+" << endl;
         cetakHasilHitungSuara();
         return;
     } else{
-        cout << "Maaf, masa pemilihan masih berjalan!\n";
+        cout << "+---------------------------------------+" << endl;
+        cout << "|  Maaf, masa pemilihan masih berjalan! |\n";
+        cout << "+---------------------------------------+" << endl;
         return;
     }
 }

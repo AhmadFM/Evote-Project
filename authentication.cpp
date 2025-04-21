@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <cctype>
+#include <conio.h> // password asterisk
 #include "authentication.hpp"
 using namespace std;
 
@@ -62,7 +63,9 @@ void saveNewAcc(string filename, string nama, string pass, string jenis) {
 
         file.close();
     } else {
-        cout << "Gagal membuka file.\n";
+        cout << "+---------------------+" << endl;
+        cout << "| Gagal membuka file! |" << endl;
+        cout << "+---------------------+" << endl;
     }
 }
 
@@ -124,23 +127,31 @@ bool verifRegister(string nama, string password, string jenis) {
     // mengecek apakah pilihan user sesuai dengan kriteria aun yang ada
     // mengecek apakah password valid sesuai jenis akun yang dipilih sebelumnya
     if (nameInData(nama)) {
-        cout << "Nama sudah digunakan, coba nama lain." << endl;
+        cout << "\n+--------------------------------------+" << endl;
+        cout << "| Nama sudah digunakan, coba nama lain |" << endl;
+        cout << "+--------------------------------------+" << endl;
         return false;
     }
 
     if (!isInType(jenis)) {
-        cout << "Pilih jenis akun yang sesuai." << endl;;
+        cout << "\n+------------------------------+" << endl;
+        cout << "| Pilih jenis akun yang sesuai |" << endl;
+        cout << "+------------------------------+" << endl;
         return false;
     }
 
     if (!validPassword(jenis, password)) {
-        cout << "Password tidak sesuai" << endl;
+        cout << "\n+-----------------------------------------------------+" << endl;
+        cout << "| Maaf, assword harus lebih dari 8 dan kurang dari 12 |" << endl;
+        cout << "+-----------------------------------------------------+" << endl;
         return false;
     }
 
     addUser(nama, password, jenis);
     saveNewAcc("akun.csv", nama, password, jenis);
-    cout << "Registrasi berhasil.";
+    cout << "\n+-----------------------+" << endl;
+    cout << "|  Registrasi berhasil  |" << endl;
+    cout << "+-----------------------+" << endl << endl;
     return true;
 }
 
@@ -172,15 +183,25 @@ string verifLogin(string accountName, string password) {
     string typeOfAcc = jenisAdmin(accountName, password);
 
     if (typeOfAcc == "Timses"){
-       cout << "Login berhasil" << endl;
+        cout << "\n+------------------+" << endl;
+        cout << "|  Login berhasil  |" << endl;
+        cout << "+------------------+" << endl;
     } else if (typeOfAcc == "Panitia") {
-        cout << "Login berhasil" << endl;
+        cout << "\n+------------------+" << endl;
+        cout << "|  Login berhasil  |" << endl;
+        cout << "+------------------+" << endl;
     } else if (typeOfAcc == "unmatched") {
-        cout << "Password yang anda masukan salah" << endl;
+        cout << "\n+----------------------------------+" << endl;
+        cout << "| Password yang anda masukan salah |" << endl;
+        cout << "+----------------------------------+" << endl;
     } else if (typeOfAcc == "notfound") {
-        cout << "Akun tidak ditemukan" << endl;
+        cout << "\n+----------------------+" << endl;
+        cout << "| Akun tidak ditemukan |" << endl;
+        cout << "+----------------------+" << endl;
     } else {
-        cout << "Login berhasil" << endl;
+        cout << "\n+------------------+" << endl;
+        cout << "|  Login berhasil  |" << endl;
+        cout << "+------------------+" << endl;
     }   
     return typeOfAcc;
 }
@@ -190,6 +211,26 @@ void verifPaslon() {
     // cek timsesnya apakah sama atau tidak -> sama = gagal
     // apakah data paslon sesuai dengan ketentuan yang ada pada panitia
 }
+
+std::string inputPassword() {
+    std::string password;
+    char ch;
+
+    while ((ch = _getch()) != 13) { // 13 = Enter
+        if (ch == 8) { // Backspace
+            if (!password.empty()) {
+                password.pop_back();
+                std::cout << "\b \b";
+            }
+        } else {
+            password += ch;
+            std::cout << '*';
+        }
+    }
+    std::cout << std::endl;
+    return password;
+}
+
 
 // int main() {
 //     string name, password;

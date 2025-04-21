@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <conio.h>
 #include "register.hpp"
 #include "authentication.hpp"
 
@@ -11,15 +12,17 @@ void registerUser ()
     string username, password, role;
     bool verificated = false;
 
-    cout << "================== Register ==================\n";
-    cout << "Masukkan Username: ";
+    cout << "+---------------------------------------+" << endl;
+    cout << "|                REGISTER               |" << endl;
+    cout << "+---------------------------------------+" << endl;
+    cout << "| Username: ";
     cin >> username;
-    cout << "Pilih peran (Panitia/Timses): "; 
+    cout << "| Tipe Akun (panitia/timses): "; 
     cin >> role;
-    cout << "Masukkan Password: ";
-    cin >> password;
-        verificated = verifRegister(username, password, role);
-    }
+    cout << "| Password: ";
+    password = inputPassword(); //
+    verificated = verifRegister(username, password, role);
+}
 
     
 
