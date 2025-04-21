@@ -205,71 +205,62 @@ void ubahKetentuan()
     cout << "|         Ubah Ketentuan Voting         |" << endl;
     cout << "+---------------------------------------+" << endl;
 
-    time_t start_timestamp = time(NULL);
-    struct tm current_date = *localtime(&start_timestamp);
+    cout << "| 1. Kapan mulai voting? \n";
+    struct tm start_date;
+    {
+        int year = 0;
+        int month = 0;
+        int day = 0;
+        int hour = 0;
+        int minute = 0;
+        int seconds = 0;
 
-    // cout << "| 1. Kapan mulai voting? \n";
-    // struct tm start_date;
-    // {
-    //     int year = 0;
-    //     int month = 0;
-    //     int day = 0;
-    //     int hour = 0;
-    //     int minute = 0;
-    //     int seconds = 0;
+        while (true) {
+            cout << "| Tahun: ";
+            cin >> year; 
+            if (year > 1901) break;
+        }
+        while (true)
+        {
+            cout << "| Bulan: ";
+            cin >> month; 
+            if (month > 0 && month < 13) break;
+        }
+        while (true)
+        {
+            cout << "| Tanggal: ";
+            cin >> day;
+            if (day > 0 && day < 32) break;
+        }
+        while (true)
+        {
+            cout << "| Jam: ";
+            cin >> hour; 
+            if (hour > -1 && hour < 24) break;
+        }
+        while (true)
+        {
+            cout << "| Menit: ";
+            cin >> minute; 
+            if (minute > -1 && minute < 60) break;
+        }
+        while (true)
+        {
+            cout << "| Detik: ";
+            cin >> seconds;
+            if (seconds > -1 && seconds < 60) break;
+        }
 
-    //     while (true) {
-    //         cout << "| Tahun: ";
-    //         cin >> year; 
-    //         if (year > 1901) break;
-    //     }
-    //     while (true)
-    //     {
-    //         cout << "| Bulan: ";
-    //         cin >> month; 
-    //         if (month > 0 && month < 13) break;
-    //     }
-    //     while (true)
-    //     {
-    //         cout << "| Tanggal: ";
-    //         cin >> day;
-    //         if (day > 0 && day < 32) break;
-    //     }
-    //     while (true)
-    //     {
-    //         cout << "| Jam: ";
-    //         cin >> hour; 
-    //         if (hour > -1 && hour < 24) break;
-    //     }
-    //     while (true)
-    //     {
-    //         cout << "| Menit: ";
-    //         cin >> minute; 
-    //         if (minute > -1 && minute < 60) break;
-    //     }
-    //     while (true)
-    //     {
-    //         cout << "| Detik: ";
-    //         cin >> seconds;
-    //         if (seconds > -1 && seconds < 60) break;
-    //     }
+        start_date.tm_year = year - 1900;
+        start_date.tm_mon = month - 1;
+        start_date.tm_mday = day;
+        start_date.tm_hour = hour; 
+        start_date.tm_min = minute; 
+        start_date.tm_sec = seconds;
+        start_date.tm_isdst = -1;
+    }
 
-    //     start_date.tm_year = year - 1900;
-    //     start_date.tm_mon = month - 1;
-    //     start_date.tm_mday = day;
-    //     start_date.tm_hour = hour; 
-    //     start_date.tm_min = minute; 
-    //     start_date.tm_sec = seconds;
-    //     start_date.tm_isdst = -1;
-    // }
-
-    cout << "| Waktu voting dimulai pada waktu saat ini \n";
-    cout << "| * Tahun: " << current_date.tm_year + 1900 << "\n";
-    cout << "| * Bulan: " << current_date.tm_mon + 1 << "\n";
-    cout << "| * Tanggal: " << current_date.tm_mday << "\n";
-    cout << "| * Jam Menit: " << current_date.tm_hour << ":" << current_date.tm_min << "\n\n";
-
-    cout << "| Kapan selesai voting? (tidak boleh kurang dari waktu mulai voting) \n";
+    cout << "| 2. Kapan selesai voting? \n";
     struct tm end_date;
     {
         int year = 0;
@@ -277,51 +268,90 @@ void ubahKetentuan()
         int day = 0;
         int hour = 0;
         int minute = 0;
+        int seconds = 0;
 
         while (true) {
             cout << "| Tahun: ";
             cin >> year; 
-            if (year >= current_date.tm_year + 1900) break;
+            if (year - 1900 < start_date.tm_year){
+                cout << "tahun tidak valid, harus lebih besar dari tahun mulai voting\n";
+                continue;
+            } 
+            if (year > 1901) {
+                break;
+            } else {
+                cout << "tahun tidak valid" << endl; 
+            }
         }
         while (true)
         {
             cout << "| Bulan: ";
-            cin >> month;
-            if (year == current_date.tm_year + 1900)
-            {
-                if (month >= current_date.tm_mon + 1 && month < 13) break;
+            cin >> month; 
+            if (month - 1 < start_date.tm_mon){
+                cout << "bulan tidak valid, harus lebih besar dari bulan mulai voting\n";
+                continue;
             }
-            else if (month > 0 && month < 13) break;
+            if (month > 0 && month < 13) {
+                break;
+            } else {
+                cout << "bulan tidak valid" << endl; 
+            }
         }
         while (true)
         {
             cout << "| Tanggal: ";
             cin >> day;
-            if (year == current_date.tm_year + 1900 && month == current_date.tm_mon + 1)
-            {
-                if (day >= current_date.tm_mday && day < 32) break;
+            if ((day < start_date.tm_mday) && (month -1 <= start_date.tm_mon) && (year - 1900 <= start_date.tm_year)){
+                cout << "tanggal tidak valid, harus lebih besar dari tanggal mulai voting\n";
+                continue;
             }
-            else if (day > 0 && day < 32) break;
+            if (day > 0 && day < 32) {
+                break;
+            } else {
+                cout << "tanggal tidak valid" << endl; 
+            }
         }
         while (true)
         {
             cout << "| Jam: ";
-            cin >> hour;
-            if (year == current_date.tm_year + 1900 && month == current_date.tm_mon + 1 && day == current_date.tm_mday)
-            {
-                if (hour >= current_date.tm_hour && hour < 24) break;
+            cin >> hour; 
+            if ((hour < start_date.tm_hour) && (day <= start_date.tm_mday) && (month - 1 <= start_date.tm_mon) && (year - 1900 <= start_date.tm_year)){
+                cout << "jam tidak valid, harus lebih besar dari jam mulai voting\n";
+                continue;
             }
-            else if (hour > 0 && hour < 24) break;
+            if (hour > -1 && hour < 24) {
+                break;
+            } else {
+                cout << "jam tidak valid" << endl; 
+            }
         }
         while (true)
         {
             cout << "| Menit: ";
             cin >> minute; 
-            if (year == current_date.tm_year + 1900 && month == current_date.tm_mon + 1 && day == current_date.tm_mday && hour == current_date.tm_hour)
-            {
-                if (minute >= current_date.tm_min && minute < 60) break;
+            if ((minute < start_date.tm_min) && (hour <= start_date.tm_hour)&&(day <= start_date.tm_mday)&&(month - 1 <= start_date.tm_mon)&&(year - 1900 <= start_date.tm_year)){
+                cout << "menit tidak valid, harus lebih besar dari menit mulai voting\n";
+                continue;
             }
-            else if (minute > -1 && minute < 60) break;
+            if (minute > -1 && minute < 60) {
+                 break;
+            } else {
+                cout << "menit tidak valid" << endl; 
+            }
+        }
+        while (true)
+        {
+            cout << "| Detik: ";
+            cin >> seconds;
+            if ((seconds <= start_date.tm_sec) && (minute <= start_date.tm_min)&&(hour <= start_date.tm_hour)&&(day <= start_date.tm_mday)&&(month - 1 <= start_date.tm_mon)&&(year - 1900 <= start_date.tm_year)){
+                cout << "detik tidak valid, harus lebih besar dari detik mulai voting\n";
+                continue;
+            }
+            if (seconds > -1 && seconds < 60) {
+                break;
+            } else {
+                cout << "detik tidak valid" << endl; 
+            }
         }
     
         end_date.tm_year = year - 1900;
@@ -329,7 +359,7 @@ void ubahKetentuan()
         end_date.tm_mday = day;
         end_date.tm_hour = hour; 
         end_date.tm_min = minute; 
-        end_date.tm_sec = 0;
+        end_date.tm_sec = seconds;
         end_date.tm_isdst = -1;
         system("cls");
     }
@@ -344,7 +374,7 @@ void ubahKetentuan()
         return;
     }
 
-    // time_t start_timestamp = mktime(&start_date);
+    time_t start_timestamp = mktime(&start_date);
     time_t end_timestamp = mktime(&end_date);
 
     file << start_timestamp << "\n" << end_timestamp;
@@ -429,25 +459,30 @@ void verifikasiKandidat()
     writeKandidat(headKandidatConfirmed);
 }
 
-void lihatLaporanGugatan()
-{
-    cout << "\n+---------------------------------------+" << endl;
-    cout << "|         Lihat Laporan Gugatan         |" << endl;
-    cout << "+---------------------------------------+" << endl;
-
-    laporanGugatan* headLaporan = readLaporanGugatan();
-    laporanGugatan* currentLaporan = headLaporan;
-
-    int noUrut = 1;
-    while (currentLaporan != NULL)
-    {
-        cout << noUrut << ". \n";
-        cout << "| Penggugat: " << currentLaporan->penggugat << "\n";
-        cout << "| Tergugat: " << currentLaporan->tergugat << "\n";
-        cout << "| Teks: " << currentLaporan->teks << "\n\n";
-
-        noUrut++;
-        currentLaporan = currentLaporan->next;
+void lihatLaporanGugatan(){   
+    string check = "Tidak";
+    while (check != "Ya"){
         system("cls");
+        cout << "+---------------------------------------+" << endl;
+        cout << "|         Lihat Laporan Gugatan         |" << endl;
+        cout << "+---------------------------------------+" << endl;
+
+        laporanGugatan* headLaporan = readLaporanGugatan();
+        laporanGugatan* currentLaporan = headLaporan;
+        
+        int noUrut = 1;
+        
+        while (currentLaporan != NULL){
+            cout << noUrut << ". \n";
+            cout << "| Penggugat: " << currentLaporan->penggugat << "\n";
+            cout << "| Tergugat: " << currentLaporan->tergugat << "\n";
+            cout << "| Teks: " << currentLaporan->teks << "\n\n";
+            
+            noUrut++;
+            currentLaporan = currentLaporan->next;
+        }
+        cout << "Selesai membaca? (Ya/Tidak) >>> ";
+        cin >> check;
     }
+    system("cls");
 }
