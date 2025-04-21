@@ -24,7 +24,9 @@ paslon* readKandidat()
     ifstream file("./calon_kandidat.csv");
     
     if (!file.is_open()) {
-        cerr << "Failed to open file" << endl;
+        cout << "\n+---------------------------------------+" << endl;
+        cerr << "|          Failed to open file          |" << endl;
+        cout << "+---------------------------------------+" << endl;
         return NULL;
     }
 
@@ -82,7 +84,9 @@ bool writeKandidat(paslon* headKandidat)
     ofstream file("./confirmedKandidat.csv");
     
     if (!file.is_open()) {
-        cerr << "Failed to open file" << endl;
+        cout << "\n+---------------------------------------+" << endl;
+        cerr << "|          Failed to open file          |" << endl;
+        cout << "+---------------------------------------+" << endl;
         return false;
     }
 
@@ -118,7 +122,9 @@ laporanGugatan* readLaporanGugatan()
     ifstream file("./laporan_gugatan.csv");
     
     if (!file.is_open()) {
-        cerr << "Failed to open file" << endl;
+        cout << "\n+---------------------------------------+" << endl;
+        cerr << "|          Failed to open file          |" << endl;
+        cout << "+---------------------------------------+" << endl;
         return NULL;
     }
 
@@ -191,9 +197,11 @@ laporanGugatan* readLaporanGugatan()
 
 void ubahKetentuan()
 {
-    cout << "\n ======= Ubah Ketentuan Voting =======\n\n";
+    cout << "\n+---------------------------------------+" << endl;
+    cout << "|         Ubah Ketentuan Voting         |" << endl;
+    cout << "+---------------------------------------+" << endl;
 
-    cout << "1. Kapan mulai voting?\n";
+    cout << "| 1. Kapan mulai voting? \n";
     struct tm start_date;
     {
         int year = 0;
@@ -204,37 +212,37 @@ void ubahKetentuan()
         int seconds = 0;
 
         while (true) {
-            cout << "Tahun: ";
+            cout << "| Tahun: ";
             cin >> year; 
             if (year > 1901) break;
         }
         while (true)
         {
-            cout << "Bulan: ";
+            cout << "| Bulan: ";
             cin >> month; 
             if (month > 0 && month < 13) break;
         }
         while (true)
         {
-            cout << "Tanggal: ";
+            cout << "| Tanggal: ";
             cin >> day;
             if (day > 0 && day < 32) break;
         }
         while (true)
         {
-            cout << "Jam: ";
+            cout << "| Jam: ";
             cin >> hour; 
             if (hour > -1 && hour < 24) break;
         }
         while (true)
         {
-            cout << "Menit: ";
+            cout << "| Menit: ";
             cin >> minute; 
             if (minute > -1 && minute < 60) break;
         }
         while (true)
         {
-            cout << "Detik: ";
+            cout << "| Detik: ";
             cin >> seconds;
             if (seconds > -1 && seconds < 60) break;
         }
@@ -248,7 +256,7 @@ void ubahKetentuan()
         start_date.tm_isdst = -1;
     }
 
-    cout << "2. Kapan selesai voting?\n";
+    cout << "| 2. Kapan selesai voting? \n";
     struct tm end_date;
     {
         int year = 0;
@@ -259,37 +267,37 @@ void ubahKetentuan()
         int seconds = 0;
 
         while (true) {
-            cout << "Tahun: ";
+            cout << "| Tahun: ";
             cin >> year; 
             if (year > 1901) break;
         }
         while (true)
         {
-            cout << "Bulan: ";
+            cout << "| Bulan: ";
             cin >> month; 
             if (month > 0 && month < 13) break;
         }
         while (true)
         {
-            cout << "Tanggal: ";
+            cout << "| Tanggal: ";
             cin >> day;
             if (day > 0 && day < 32) break;
         }
         while (true)
         {
-            cout << "Jam: ";
+            cout << "| Jam: ";
             cin >> hour; 
             if (hour > -1 && hour < 24) break;
         }
         while (true)
         {
-            cout << "Menit: ";
+            cout << "| Menit: ";
             cin >> minute; 
             if (minute > -1 && minute < 60) break;
         }
         while (true)
         {
-            cout << "Detik: ";
+            cout << "| Detik: ";
             cin >> seconds;
             if (seconds > -1 && seconds < 60) break;
         }
@@ -306,7 +314,9 @@ void ubahKetentuan()
     ofstream file("./ketentuan.txt");
     
     if (!file.is_open()) {
-        cerr << "Failed to open file" << endl;
+        cout << "\n+---------------------------------------+" << endl;
+        cerr << "|          Failed to open file          |" << endl;
+        cout << "+---------------------------------------+" << endl;
         return;
     }
 
@@ -320,7 +330,9 @@ void ubahKetentuan()
 
 void verifikasiKandidat()
 {
-    cout << "\n ======= Verifikasi Kandidat Paslon =======\n\n";
+    cout << "\n+---------------------------------------+" << endl;
+    cout << "|      Verifikasi Kandidat Paslon       |" << endl;
+    cout << "+---------------------------------------+" << endl;
 
     paslon* headKandidatConfirmed = NULL;
     paslon* currentKandidatConfirmed = NULL;
@@ -336,21 +348,23 @@ void verifikasiKandidat()
     paslon* currentKandidat = headKandidat;
     while (currentKandidat != NULL)
     {
-        cout << "No Urut: " << noUrut << "\n";
-        cout << "Nama Tim Sukses: " << currentKandidat->nama_tim << "\n";
-        cout << "Ketua: " << currentKandidat->ketua << "\n";
-        cout << "Wakil: " << currentKandidat->wakil << "\n";
-        cout << "Visi: " << currentKandidat->visi << "\n";
-        cout << "Misi: " << currentKandidat->misi << "\n";
+        cout << "| No Urut: " << noUrut << "\n";
+        cout << "| Nama Tim Sukses: " << currentKandidat->nama_tim << "\n";
+        cout << "| Ketua: " << currentKandidat->ketua << "\n";
+        cout << "| Wakil: " << currentKandidat->wakil << "\n";
+        cout << "| Visi: " << currentKandidat->visi << "\n";
+        cout << "| Misi: " << currentKandidat->misi << "\n";
 
         while (true)
         {
-            cout << "Apakah diterima? (Ya/Tidak) ";
+            cout << "| Apakah diterima? (Ya/Tidak) >>> ";
             string konfirmasi = "";
             cin >> konfirmasi;
             if (konfirmasi == "Ya")
             {
-                cout << "Kandidat diterima!\n\n";
+                cout << "\n+---------------------------------------+" << endl;
+                cout << "|          Kandidat diterima!           |" << endl;
+                cout << "+---------------------------------------+" << endl;
 
                 paslon* kandidatConfirmed = new paslon {
                     .nama_tim = currentKandidat->nama_tim,
@@ -375,7 +389,9 @@ void verifikasiKandidat()
             }
             else if (konfirmasi == "Tidak")
             {
-                cout << "Kandidat ditolak!\n\n";
+                cout << "\n+---------------------------------------+" << endl;
+                cout << "|           Kandidat ditolak!           |" << endl;
+                cout << "+---------------------------------------+" << endl;
                 break;
             }
         }
@@ -389,7 +405,9 @@ void verifikasiKandidat()
 
 void lihatLaporanGugatan()
 {
-    cout << "\n ======= Lihat Laporan Gugatan =======\n\n";
+    cout << "\n+---------------------------------------+" << endl;
+    cout << "|         Lihat Laporan Gugatan         |" << endl;
+    cout << "+---------------------------------------+" << endl;
 
     laporanGugatan* headLaporan = readLaporanGugatan();
     laporanGugatan* currentLaporan = headLaporan;
@@ -398,9 +416,9 @@ void lihatLaporanGugatan()
     while (currentLaporan != NULL)
     {
         cout << noUrut << ". \n";
-        cout << "Penggugat: " << currentLaporan->penggugat << "\n";
-        cout << "Tergugat: " << currentLaporan->tergugat << "\n";
-        cout << "Teks: " << currentLaporan->teks << "\n\n";
+        cout << "| Penggugat: " << currentLaporan->penggugat << "\n";
+        cout << "| Tergugat: " << currentLaporan->tergugat << "\n";
+        cout << "| Teks: " << currentLaporan->teks << "\n\n";
 
         noUrut++;
         currentLaporan = currentLaporan->next;

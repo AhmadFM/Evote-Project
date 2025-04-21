@@ -10,10 +10,12 @@ void login()
 {
     string username, password;
 
-    cout << "======= Login =======\n";
-    cout << "Username: ";
+    cout << "\n+---------------------------------------+" << endl;
+    cout << "|                 Login                 |\n";
+    cout << "+---------------------------------------+" << endl;
+    cout << "| Username: ";
     cin >> username;
-    cout << "Password: ";
+    cout << "| Password: ";
     password = inputPassword(); 
 
 
