@@ -3,6 +3,7 @@
 #include <sstream>
 #include <ctime>
 #include <string>
+#include <windows.h>
 #include "pemilih.hpp"
 using namespace std;
 
@@ -55,6 +56,7 @@ bool confirm(){
         }else if(yakin == "N" || yakin == "n"){
             return 0;
         }
+        system("cls");
         cout << "\n+---------------------------------------+" << endl;
         cout << "|       Maaf, input tidak sesuai        |" << endl;
         cout << "+---------------------------------------+" << endl;
@@ -136,6 +138,7 @@ void kirimSuara(int no_urut, string username, time_t date)
 
         file.close();
     } else {
+        system("cls");
         cout << "\n+---------------------------------------+" << endl;
         cout << "|          Gagal membuka file1          |\n";
         cout << "+---------------------------------------+" << endl;
@@ -177,6 +180,7 @@ void voting(time_t start, time_t end, time_t now, string username){
                 if (pilih > 0 && pilih < jumlahPaslon){
                     break;
                 } else{
+                    system("cls");
                     cout << "\n+---------------------------------------+" << endl;
                     cout << "|       Maaf, input tidak sesuai        |" << endl;
                     cout << "+---------------------------------------+" << endl;
@@ -191,12 +195,15 @@ void voting(time_t start, time_t end, time_t now, string username){
                 cek = false;
             }
         } while(cek != true);
+        system("cls");
         cout << "\n+-------------------------------------------------+" << endl;
         cout << "| Terima kasih, telah menggunakan hak suara Anda! |" << endl;
         cout << "+-------------------------------------------------+" << endl;
     } else{
+        system("cls");
         cout << "\n+---------------------------------------+" << endl;
-        cout << "| Maaf, waktu memilih tidak sesuai! |\n";
+        cout << "|   Maaf, waktu memilih tidak sesuai!   |\n";
+        cout << "+---------------------------------------+" << endl;
         return;
     }
 }
@@ -257,6 +264,7 @@ void lihatJumlahSuara(time_t end = time(0)){
         cetakHasilHitungSuara();
         return;
     } else{
+        system("cls");
         cout << "+---------------------------------------+" << endl;
         cout << "|  Maaf, masa pemilihan masih berjalan! |\n";
         cout << "+---------------------------------------+" << endl;

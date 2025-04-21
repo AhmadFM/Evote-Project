@@ -3,6 +3,7 @@
 #include <sstream>
 #include <cctype>
 #include <conio.h> // password asterisk
+#include <windows.h>
 #include "authentication.hpp"
 using namespace std;
 
@@ -63,6 +64,7 @@ void saveNewAcc(string filename, string nama, string pass, string jenis) {
 
         file.close();
     } else {
+        system("cls");
         cout << "+---------------------+" << endl;
         cout << "| Gagal membuka file! |" << endl;
         cout << "+---------------------+" << endl;
@@ -127,6 +129,7 @@ bool verifRegister(string nama, string password, string jenis) {
     // mengecek apakah pilihan user sesuai dengan kriteria aun yang ada
     // mengecek apakah password valid sesuai jenis akun yang dipilih sebelumnya
     if (nameInData(nama)) {
+        system("cls");
         cout << "\n+--------------------------------------+" << endl;
         cout << "| Nama sudah digunakan, coba nama lain |" << endl;
         cout << "+--------------------------------------+" << endl;
@@ -134,6 +137,7 @@ bool verifRegister(string nama, string password, string jenis) {
     }
 
     if (!isInType(jenis)) {
+        system("cls");
         cout << "\n+------------------------------+" << endl;
         cout << "| Pilih jenis akun yang sesuai |" << endl;
         cout << "+------------------------------+" << endl;
@@ -141,6 +145,7 @@ bool verifRegister(string nama, string password, string jenis) {
     }
 
     if (!validPassword(jenis, password)) {
+        system("cls");
         cout << "\n+-----------------------------------------------------+" << endl;
         cout << "| Maaf, password harus lebih dari 8 dan kurang dari 12 |" << endl;
         cout << "+-----------------------------------------------------+" << endl;
@@ -149,6 +154,7 @@ bool verifRegister(string nama, string password, string jenis) {
 
     addUser(nama, password, jenis);
     saveNewAcc("akun.csv", nama, password, jenis);
+    system("cls");
     cout << "\n+-----------------------+" << endl;
     cout << "|  Registrasi berhasil  |" << endl;
     cout << "+-----------------------+" << endl << endl;
@@ -183,22 +189,27 @@ string verifLogin(string accountName, string password) {
     string typeOfAcc = jenisAdmin(accountName, password);
 
     if (typeOfAcc == "Timses"){
+        system("cls");
         cout << "\n+------------------+" << endl;
         cout << "|  Login berhasil  |" << endl;
         cout << "+------------------+" << endl;
     } else if (typeOfAcc == "Panitia") {
+        system("cls");
         cout << "\n+------------------+" << endl;
         cout << "|  Login berhasil  |" << endl;
         cout << "+------------------+" << endl;
     } else if (typeOfAcc == "unmatched") {
+        system("cls");
         cout << "\n+----------------------------------+" << endl;
         cout << "| Password yang anda masukan salah |" << endl;
         cout << "+----------------------------------+" << endl;
     } else if (typeOfAcc == "notfound") {
+        system("cls");
         cout << "\n+----------------------+" << endl;
         cout << "| Akun tidak ditemukan |" << endl;
         cout << "+----------------------+" << endl;
     } else {
+        system("cls");
         cout << "\n+------------------+" << endl;
         cout << "|  Login berhasil  |" << endl;
         cout << "+------------------+" << endl;

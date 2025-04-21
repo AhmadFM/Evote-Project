@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <windows.h>
 
 #include "timses.hpp"
 
@@ -10,6 +11,7 @@ using namespace std;
 
 // Menu Timses
 void tampilkanMenu() {
+    system("cls");
     cout << "\n+---------------------------------------+" << endl;
     cout << "|            Menu Tim Sukses            |" << endl;
     cout << "+---------------------------------------+" << endl;
@@ -29,10 +31,12 @@ void simpanKeCSV(const string &namaTim, const Kandidat &kandidat, const string &
     if (file.is_open()) {
         file << namaTim << "," << kandidat.namaKetua << "," << kandidat.namaWakilKetua << "," << visi << "," << misi << endl;
         file.close();
+        system("cls");
         cout << "\n+---------------------------------------+" << endl;
         cout << "|        Data berhasil disimpan!        |" << endl;
         cout << "+---------------------------------------+" << endl;
     } else {
+        system("cls");
         cout << "\n+---------------------------------------+" << endl;
         cout << "|    Gagal membuka file kandidat.csv!   |" << endl;
         cout << "+---------------------------------------+" << endl;
@@ -45,6 +49,7 @@ void daftarkanKandidat(Kandidat &kandidat) {
     getline(cin, kandidat.namaKetua);
     cout << "| Masukkan nama Wakil Ketua: ";
     getline(cin, kandidat.namaWakilKetua);
+    system("cls");
     cout << "\n+---------------------------------------+" << endl;
     cout << "|     Kandidat berhasil didaftarkan     |" << endl;
     cout << "+---------------------------------------+" << endl;
@@ -53,6 +58,7 @@ void daftarkanKandidat(Kandidat &kandidat) {
 // 2. membuat visi dan misi
 void buatVisiMisi(const string &namaTim, const Kandidat &kandidat) {
     if (kandidat.namaKetua.empty() || kandidat.namaWakilKetua.empty()) {
+        system("cls");
         cout << "\n+---------------------------------------+" << endl;
         cout << "|   Anda belum mendaftarkan kandidat!   |" << endl;
         cout << "+---------------------------------------+" << endl;
@@ -105,16 +111,19 @@ void perbaruiCSV(const string &namaTim, const Kandidat &kandidat) {
         rename("calon_kandidat_temp.csv", "calon_kandidat.csv");
 
         if (ditemukan) {
+            system("cls");
             cout << "\n+---------------------------------------+" << endl;
             cout << "|   Data kandidat berhasil diperbarui   |" << endl;
             cout << "+---------------------------------------+" << endl;
         } else {
+            system("cls");
             cout << "\n+---------------------------------------+" << endl;
             cout << "|       Nama tim tidak ditemukan,       |" << endl;
             cout << "|       tidak ada perubahan.            |" << endl;
             cout << "+---------------------------------------+" << endl;
         }
     } else {
+        system("cls");
         cout << "\n+---------------------------------------+" << endl;
         cout << "|          Gagal membuka file!          |" << endl;
         cout << "+---------------------------------------+" << endl;
@@ -124,11 +133,13 @@ void perbaruiCSV(const string &namaTim, const Kandidat &kandidat) {
 // Fungsi untuk mengedit informasi Ketua dan Wakil Ketua
 void editInformasiKandidat(const string &namaTim, Kandidat &kandidat) {
     if (kandidat.namaKetua.empty() || kandidat.namaWakilKetua.empty()) {
+        system("cls");
         cout << "\n+---------------------------------------+" << endl;
         cout << "|  Belum ada kandidat yang terdaftar,   |" << endl;
         cout << "|  Silahkan daftarkan kandidat anda.    |" << endl;
         cout << "+---------------------------------------+" << endl;
     } else {
+        system("cls");
         cout << "\n+---------------------------------------+" << endl;
         cout << "|      Informasi kandidat saat ini      |" << endl;
         cout << "+---------------------------------------+" << endl;
@@ -152,6 +163,7 @@ void editInformasiKandidat(const string &namaTim, Kandidat &kandidat) {
 
         // Perbarui data di file .csv
         perbaruiCSV(namaTim, kandidat);
+        system("cls");
         cout << "\n+---------------------------------------+" << endl;
         cout << "|Informasi kandidat berhasil diperbarui!|" << endl;
         cout << "+---------------------------------------+" << endl;
@@ -162,6 +174,7 @@ void editInformasiKandidat(const string &namaTim, Kandidat &kandidat) {
 // Fungsi untuk melaporkan gugatan paslon
 void laporGugatanPaslon(const string &namaTim) {
     if (namaTim.empty()) {
+        system("cls");
         cout << "\n+---------------------------------------+" << endl;
         cout << "| Kamu belum menambahkan Nama timsukses |" << endl;
         cout << "+---------------------------------------+" << endl;
@@ -185,10 +198,12 @@ void laporGugatanPaslon(const string &namaTim) {
     if (file.is_open()) {
         file << timPenggugat << "," << timTergugat << "," << isiGugatan << endl;
         file.close();
+        system("cls");
         cout << "\n+---------------------------------------+" << endl;
         cout << "|   Laporan gugatan berhasil disimpan   |" << endl;
         cout << "+---------------------------------------+" << endl;
     } else {
+        system("cls");
         cout << "\n+---------------------------------------+" << endl;
         cout << "|          Gagal membuka file!          |" << endl;
         cout << "+---------------------------------------+" << endl;
@@ -222,9 +237,11 @@ void main_timses() {
         int pilihan;
         cin >> pilihan;
         cin.ignore(); // Membersihkan buffer input
+        system("cls");
 
         if (pilihan == 1) {
             if (sudahTerdaftar) {
+                system("cls");
                 cout << "+------------------------------------------------+" << endl;
                 cout << "| Ups, Anda telah mendaftarkan pasangan kandidat |" << endl;
                 cout << "+------------------------------------------------+" << endl;
@@ -239,11 +256,10 @@ void main_timses() {
         } else if (pilihan == 4) {
             laporGugatanPaslon(namaTim);
         } else if (pilihan == 5) {
-            cout << "\n+---------------------------------------+" << endl;
-            cout << "|          Keluar dari program.         |" << endl;
-            cout << "+---------------------------------------+" << endl;
+            system("cls");
             break;
         } else {
+            system("cls");
             cout << "+---------------------------------------+" << endl;
             cout << "|      Masukan pilihan yang sesuai      |" << endl;
             cout << "+---------------------------------------+" << endl;

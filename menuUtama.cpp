@@ -3,6 +3,7 @@
 #include <ctime>
 #include <fstream>
 #include <ctime>
+#include <windows.h>
 #include "menuUtama.hpp"
 #include "pemilih.hpp"
 #include "panitia.hpp"
@@ -27,6 +28,7 @@ void menuPanitia()
         cout << "+---------------------------------------+" << endl;
         cout << "Pilih opsi >>> ";
         cin >> pilihan;
+        system("cls");
 
         switch (pilihan)
         {
@@ -40,7 +42,7 @@ void menuPanitia()
                 lihatLaporanGugatan();
                 break;
             case 0:
-                cout << "Kembali ke menu utama\n";
+                break;
             
         }
     } while (pilihan != 0);
@@ -68,6 +70,7 @@ void menuPemilih(string username)
         cout << "+---------------------------------------+" << endl;
         cout << "Pilih opsi >>> ";
         cin >> pilihan;
+        system("cls");
 
         time_t start_date;
         time_t end_date;
@@ -103,7 +106,7 @@ void menuPemilih(string username)
                 lihatJumlahSuara(now_date);
                 break;
             case 0:
-                cout << "Kembali ke menu utama\n";
+                break;
         }
 
     } while (pilihan != 0);
