@@ -195,24 +195,28 @@ void laporGugatanPaslon(const string &namaTim) {
     }
 }
 
+
+
 void main_timses() {
     Kandidat kandidat;
     bool sudahTerdaftar = false;
     string namaTim;
-
+    
     while (true) {
-        cout << "Masukkan nama Tim Sukses: ";
+        cout << "+---------------------------------------+" << endl;
+        cout << " Masukkan nama Tim Sukses: ";
+        cin.ignore(); // Membersihkan buffer input
         getline(cin, namaTim);
 
-        if (!namaTim.empty()) {
-            break;
+        if (namaTim.empty()) {
+            cout << "+---------------------------------------+" << endl;
+            cout << "| Nama Tim Sukses tidak boleh kosong    |" << endl;
+            cout << "+---------------------------------------+" << endl;
         } else {
-            cout << "+---------------------------------------+" << endl;
-            cout << "|   Nama Tim Sukses tidak boleh kosong  |" << endl;
-            cout << "+---------------------------------------+" << endl;
+            break;
         }
     }
-
+    
     while (true) {
         tampilkanMenu();
         int pilihan;

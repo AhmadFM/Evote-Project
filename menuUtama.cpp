@@ -49,11 +49,7 @@ void menuPanitia()
 
 void menuTimSukses()
 {
-    int pilihan;
-
-    tampilkanMenu();
     main_timses();
-    
 }
 
 void menuPemilih(string username)
@@ -94,9 +90,9 @@ void menuPemilih(string username)
             fileRow++;
         }
 
-        cout << "| Start: " << start_date << "\n";
-        cout << "| End: " << end_date << "\n";
-        cout << "| Now: " << now_date << "\n";
+        // cout << "| Start: " << start_date << "\n";
+        // cout << "| End: " << end_date << "\n";
+        // cout << "| Now: " << now_date << "\n";
 
         switch (pilihan)
         {

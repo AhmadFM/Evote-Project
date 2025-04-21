@@ -269,37 +269,85 @@ void ubahKetentuan()
         while (true) {
             cout << "| Tahun: ";
             cin >> year; 
-            if (year > 1901) break;
+            if (year - 1900 < start_date.tm_year){
+                cout << "tahun tidak valid, harus lebih besar dari tahun mulai voting\n";
+                continue;
+            } 
+            if (year > 1901) {
+                break;
+            } else {
+                cout << "tahun tidak valid" << endl; 
+            }
         }
         while (true)
         {
             cout << "| Bulan: ";
             cin >> month; 
-            if (month > 0 && month < 13) break;
+            if (month - 1 < start_date.tm_mon){
+                cout << "bulan tidak valid, harus lebih besar dari bulan mulai voting\n";
+                continue;
+            }
+            if (month > 0 && month < 13) {
+                break;
+            } else {
+                cout << "bulan tidak valid" << endl; 
+            }
         }
         while (true)
         {
             cout << "| Tanggal: ";
             cin >> day;
-            if (day > 0 && day < 32) break;
+            if ((day < start_date.tm_mday) && (month -1 <= start_date.tm_mon)){
+                cout << "tanggal tidak valid, harus lebih besar dari tanggal mulai voting\n";
+                continue;
+            }
+            if (day > 0 && day < 32) {
+                break;
+            } else {
+                cout << "tanggal tidak valid" << endl; 
+            }
         }
         while (true)
         {
             cout << "| Jam: ";
             cin >> hour; 
-            if (hour > -1 && hour < 24) break;
+            if ((hour < start_date.tm_hour) && (day <= start_date.tm_mday)){
+                cout << "jam tidak valid, harus lebih besar dari jam mulai voting\n";
+                continue;
+            }
+            if (hour > -1 && hour < 24) {
+                break;
+            } else {
+                cout << "jam tidak valid" << endl; 
+            }
         }
         while (true)
         {
             cout << "| Menit: ";
             cin >> minute; 
-            if (minute > -1 && minute < 60) break;
+            if ((minute < start_date.tm_min) && (hour <= start_date.tm_hour)){
+                cout << "menit tidak valid, harus lebih besar dari menit mulai voting\n";
+                continue;
+            }
+            if (minute > -1 && minute < 60) {
+                 break;
+            } else {
+                cout << "menit tidak valid" << endl; 
+            }
         }
         while (true)
         {
             cout << "| Detik: ";
             cin >> seconds;
-            if (seconds > -1 && seconds < 60) break;
+            if ((seconds <= start_date.tm_sec) && (minute <= start_date.tm_min)){
+                cout << "detik tidak valid, harus lebih besar dari detik mulai voting\n";
+                continue;
+            }
+            if (seconds > -1 && seconds < 60) {
+                break;
+            } else {
+                cout << "detik tidak valid" << endl; 
+            }
         }
     
         end_date.tm_year = year - 1900;

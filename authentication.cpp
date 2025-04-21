@@ -142,7 +142,7 @@ bool verifRegister(string nama, string password, string jenis) {
 
     if (!validPassword(jenis, password)) {
         cout << "\n+-----------------------------------------------------+" << endl;
-        cout << "| Maaf, assword harus lebih dari 8 dan kurang dari 12 |" << endl;
+        cout << "| Maaf, password harus lebih dari 8 dan kurang dari 12 |" << endl;
         cout << "+-----------------------------------------------------+" << endl;
         return false;
     }
