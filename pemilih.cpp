@@ -138,7 +138,26 @@ void kirimSuara(int no_urut, string username, time_t date)
 
 // Voting
 void voting(time_t start, time_t end, time_t now, string username){
-    if (waktuVoting(start, end, now)){
+    // hanya bisa sekali voting
+    ifstream checkFile("./suara.csv");
+    string lastLine; 
+    if (checkFile.is_open()) { 
+        string line;     
+        while (getline(checkFile, line)) {
+            lastLine = line; 
+        }
+        checkFile.close();
+    }
+    stringstream ss(lastLine);
+    string noUrut, user, date;
+    getline(ss, noUrut, ',');
+    getline(ss, user, ',');
+    getline(ss, date, ',');
+    if (user == username){
+        cout << "Anda sudah melakukan voting!" << endl;
+        return;
+    }
+        if (waktuVoting(start, end, now)){
         bool cek = false;
         do {
             cout << "\n===== Selamat Memilih =====\n";
